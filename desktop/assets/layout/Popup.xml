@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group width="400" height="200">
+    <image name="popup_background" atlas="common.atlas" frame="black_square" width="400" height="200"/>
+    <label text="This popup is built with an external xml file." width="272" height="200" align="center" x="64" wrap="true" fontName="default_font.fnt" fontColor="fafad2"/>
+    <image name="accept_button" atlas="common.atlas" frame="accept_button" x="-64" y="40"/>
+    <image name="cancel_button" atlas="common.atlas" frame="cancel_button" x="336" y="40"/>
+</group>

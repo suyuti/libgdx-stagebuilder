@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group>
+    <image name="background_image" atlas="common.atlas" frame="background" type="background"/>
+    <button name="backButton" x="10" y="420" atlas="common.atlas" frameUp="back_button" frameDown="back_buttonH"/>
+    <textbutton name="x" atlas="common.atlas" frameUp="green_button" frameDown="green_buttonH" x="270" y="40"  witdth="400" text="Click Me 0.4" fontName="default_font.fnt" fontColor="000000" fontScale="0.4"/>
+    <textbutton name="x" atlas="common.atlas" frameUp="green_button" frameDown="green_buttonH" x="270" y="100" witdth="400" text="Click Me 0.6" fontName="default_font.fnt" fontColor="000000" fontScale="0.6"/>
+    <textbutton name="x" atlas="common.atlas" frameUp="green_button" frameDown="green_buttonH" x="270" y="160" witdth="400" text="Click Me 0.8" fontName="default_font.fnt" fontColor="000000" fontScale="0.8"/>
+    <textbutton name="x" atlas="common.atlas" frameUp="green_button" frameDown="green_buttonH" x="270" y="220" witdth="400" text="Click Me 1" fontName="default_font.fnt" fontColor="000000" fontScale="1"/>
+    <textbutton name="x" atlas="common.atlas" frameUp="green_button" frameDown="green_buttonH" x="270" y="280" witdth="400" text="Click Me 1.2" fontName="default_font.fnt" fontColor="000000" fontScale="1.2"/>
+    <textbutton name="x" atlas="common.atlas" frameUp="green_button" frameDown="green_buttonH" x="270" y="340" witdth="400" text="Click Me 1.4" fontName="default_font.fnt" fontColor="000000" fontScale="1.4"/>
+    <textbutton name="x" atlas="common.atlas" frameUp="green_button" frameDown="green_buttonH" x="270" y="400" witdth="400" text="Click Me 1.6" fontName="default_font.fnt" fontColor="000000" fontScale="1.6" />
+</group>

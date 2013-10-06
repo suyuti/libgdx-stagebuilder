@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dfxml xmloutputversion='1.0'>
+  <metadata 
+  xmlns='http://afflib.org/tcpflow/' 
+  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' 
+  xmlns:dc='http://purl.org/dc/elements/1.1/'>
+    <dc:type>Feature Extraction</dc:type>
+  </metadata>
+  <creator version='1.0'>
+    <program>TCPFLOW</program>
+    <version>1.3.0</version>
+    <build_environment>
+      <compiler>GCC 4.2</compiler>
+    </build_environment>
+    <execution_environment>
+      <os_sysname>Darwin</os_sysname>
+      <os_release>11.4.2</os_release>
+      <os_version>Darwin Kernel Version 11.4.2: Thu Aug 23 16:25:48 PDT 2012; root:xnu-1699.32.7~1/RELEASE_X86_64</os_version>
+      <host>tututil.local</host>
+      <arch>x86_64</arch>
+      <command_line>tcpflow -i en0 -C -e host heartsplus.peakgames.net</command_line>
+      <uid>501</uid>
+      <start_time>2013-10-04T12:56:48Z</start_time>
+    </execution_environment>
+  </creator>
+  <configuration>
+  </configuration>
+  <fileobject>
+    <filename>192.168.002.250.61793-107.023.062.105.00080</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:56:57.485813Z' endtime='2013-10-04T15:57:13.435692Z' src_ipn='192.168.2.250' dst_ipn='107.23.62.105' packets='3' srcport='61793' dstport='80' family='2' out_of_order_count='0' />
+  </fileobject>
+  <fileobject>
+    <filename>192.168.002.250.61794-107.023.062.105.00080</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:56:57.485867Z' endtime='2013-10-04T15:57:13.435701Z' src_ipn='192.168.2.250' dst_ipn='107.23.62.105' packets='3' srcport='61794' dstport='80' family='2' out_of_order_count='0' />
+  </fileobject>
+  <fileobject>
+    <filename>192.168.002.250.61830-107.023.062.105.00080</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:56:58.510002Z' endtime='2013-10-04T15:57:13.435710Z' src_ipn='192.168.2.250' dst_ipn='107.23.62.105' packets='3' srcport='61830' dstport='80' family='2' out_of_order_count='0' />
+  </fileobject>
+  <fileobject>
+    <filename>107.023.062.105.00080-192.168.002.250.61830</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:56:58.653883Z' endtime='2013-10-04T15:57:13.683453Z' src_ipn='107.23.62.105' dst_ipn='192.168.2.250' packets='2' srcport='80' dstport='61830' family='2' out_of_order_count='0' />
+  </fileobject>
+  <fileobject>
+    <filename>107.023.062.105.00080-192.168.002.250.61794</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:56:57.630296Z' endtime='2013-10-04T15:57:13.683454Z' src_ipn='107.23.62.105' dst_ipn='192.168.2.250' packets='2' srcport='80' dstport='61794' family='2' out_of_order_count='0' />
+  </fileobject>
+  <fileobject>
+    <filename>107.023.062.105.00080-192.168.002.250.61793</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:56:57.630126Z' endtime='2013-10-04T15:57:13.683455Z' src_ipn='107.23.62.105' dst_ipn='192.168.2.250' packets='2' srcport='80' dstport='61793' family='2' out_of_order_count='0' />
+  </fileobject>
+  <fileobject>
+    <filename>192.168.002.250.61870-107.023.062.105.00080</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:57:27.332074Z' endtime='2013-10-04T15:57:43.437077Z' src_ipn='192.168.2.250' dst_ipn='107.23.62.105' packets='3' srcport='61870' dstport='80' family='2' out_of_order_count='0' />
+  </fileobject>
+  <fileobject>
+    <filename>192.168.002.250.61869-107.023.062.105.00080</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:57:27.332031Z' endtime='2013-10-04T15:57:43.437100Z' src_ipn='192.168.2.250' dst_ipn='107.23.62.105' packets='3' srcport='61869' dstport='80' family='2' out_of_order_count='0' />
+  </fileobject>
+  <fileobject>
+    <filename>107.023.062.105.00080-192.168.002.250.61869</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:57:27.497745Z' endtime='2013-10-04T15:57:43.582012Z' src_ipn='107.23.62.105' dst_ipn='192.168.2.250' packets='2' srcport='80' dstport='61869' family='2' out_of_order_count='0' />
+  </fileobject>
+  <fileobject>
+    <filename>107.023.062.105.00080-192.168.002.250.61870</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:57:27.497487Z' endtime='2013-10-04T15:57:43.582268Z' src_ipn='107.23.62.105' dst_ipn='192.168.2.250' packets='2' srcport='80' dstport='61870' family='2' out_of_order_count='0' />
+  </fileobject>
+  <fileobject>
+    <filename>192.168.002.250.61923-107.023.062.105.00080</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:57:44.135448Z' endtime='2013-10-04T15:58:03.438648Z' src_ipn='192.168.2.250' dst_ipn='107.23.62.105' packets='3' srcport='61923' dstport='80' family='2' out_of_order_count='0' />
+  </fileobject>
+  <fileobject>
+    <filename>107.023.062.105.00080-192.168.002.250.61923</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:57:44.281629Z' endtime='2013-10-04T15:58:03.585841Z' src_ipn='107.23.62.105' dst_ipn='192.168.2.250' packets='2' srcport='80' dstport='61923' family='2' out_of_order_count='0' />
+  </fileobject>
+  <fileobject>
+    <filename>192.168.002.250.61984-107.023.062.105.00080</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:58:28.546218Z' endtime='2013-10-04T15:58:43.439427Z' src_ipn='192.168.2.250' dst_ipn='107.23.62.105' packets='3' srcport='61984' dstport='80' family='2' out_of_order_count='0' />
+  </fileobject>
+  <fileobject>
+    <filename>107.023.062.105.00080-192.168.002.250.61984</filename>
+    <filesize>0</filesize>
+    <tcpflow startime='2013-10-04T15:58:28.689672Z' endtime='2013-10-04T15:58:43.590826Z' src_ipn='107.23.62.105' dst_ipn='192.168.2.250' packets='2' srcport='80' dstport='61984' family='2' out_of_order_count='0' />

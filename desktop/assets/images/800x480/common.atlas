@@ -1,0 +1,144 @@
+common.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+green_buttonH
+  rotate: false
+  xy: 2, 953
+  size: 260, 53
+  orig: 260, 53
+  offset: 0, 0
+  index: -1
+cancel_button
+  rotate: false
+  xy: 2, 484
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+loading_circle_background
+  rotate: false
+  xy: 2, 845
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1
+star
+  rotate: false
+  xy: 401, 900
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: -1
+loading_circle_foreground
+  rotate: false
+  xy: 110, 845
+  size: 105, 104
+  orig: 105, 104
+  offset: 0, 0
+  index: -1
+peaklogo
+  rotate: false
+  xy: 217, 845
+  size: 182, 98
+  orig: 182, 98
+  offset: 0, 0
+  index: -1
+google_plus_logo
+  rotate: false
+  xy: 204, 643
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+green_button
+  rotate: false
+  xy: 264, 945
+  size: 260, 53
+  orig: 260, 53
+  offset: 0, 0
+  index: -1
+progressbar_background
+  rotate: false
+  xy: 406, 484
+  size: 385, 36
+  orig: 385, 36
+  offset: 0, 0
+  index: -1
+back_buttonH
+  rotate: false
+  xy: 401, 845
+  size: 55, 53
+  orig: 55, 53
+  offset: 0, 0
+  index: -1
+linkedin_logo
+  rotate: false
+  xy: 804, 441
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+facebook_logo
+  rotate: false
+  xy: 406, 643
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+accept_button
+  rotate: false
+  xy: 132, 484
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+back_button
+  rotate: false
+  xy: 458, 845
+  size: 55, 53
+  orig: 55, 53
+  offset: 0, 0
+  index: -1
+instagram_logo
+  rotate: false
+  xy: 2, 643
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+black_square
+  rotate: false
+  xy: 515, 845
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+twitter_logo
+  rotate: false
+  xy: 804, 239
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+androidlogo
+  rotate: false
+  xy: 804, 2
+  size: 200, 235
+  orig: 200, 235
+  offset: 0, 0
+  index: -1
+progressbar_foreground
+  rotate: false
+  xy: 1006, 2
+  size: 16, 36
+  orig: 16, 36
+  offset: 0, 0
+  index: -1
+background
+  rotate: false
+  xy: 2, 2
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1

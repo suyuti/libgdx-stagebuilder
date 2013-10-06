@@ -1,0 +1,39 @@
+large.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bg1-large
+  rotate: false
+  xy: 2, 2
+  size: 1280, 768
+  orig: 1280, 768
+  offset: 0, 0
+  index: -1
+bg1
+  rotate: false
+  xy: 804, 1254
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+bg2
+  rotate: false
+  xy: 804, 772
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+bg3
+  rotate: false
+  xy: 2, 1254
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+bg4
+  rotate: false
+  xy: 2, 772
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1

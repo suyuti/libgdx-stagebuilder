@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group>
+    <image name="background_image" atlas="common.atlas" frame="background" type="background"/>
+
+    <button name="backButton" x="10" y="420" atlas="common.atlas" frameUp="back_button" frameDown="back_buttonH"/>
+
+    <image name="peakLogo" x="309" y="380" atlas="common.atlas" frame="peaklogo"/>
+
+    <image name="androidLogo1" x="10" y="200" atlas="common.atlas" frame="androidlogo"/>
+
+    <image name="androidLogo2" x="280" y="100" atlas="common.atlas" frame="androidlogo" rotation="30"/>
+
+    <image name="androidLogo2" x="400" y="0" atlas="common.atlas" frame="androidlogo" rotation="-30" scale="2"/>
+
+    <group name="starGroup" x="650" y="350">
+        <!-- coordinates in a group are relative to group coordinates -->
+        <image name="star1" x="0" y="0" atlas="common.atlas" frame="star" />
+        <image name="star2" x="0" y="30" atlas="common.atlas" frame="star" />
+        <image name="star3" x="30" y="0" atlas="common.atlas" frame="star" />
+        <image name="star4" x="30" y="30" atlas="common.atlas" frame="star" />
+    </group>
+
+    <group>
+        <!-- actors are sorted by zIndex before adding to stage. (Google plus logo will be drawn on top of other logos.)-->
+        <image name="star1" x="0" y="0" atlas="common.atlas" frame="instagram_logo"  width="100" height="100" zIndex="1"/>
+        <image name="star1" x="50" y="0" atlas="common.atlas" frame="twitter_logo"   width="100" height="100" zIndex="2"/>
+        <image name="star1" x="100" y="0" atlas="common.atlas" frame="google_plus_logo"   width="100" height="100" zIndex="3"/>
+        <image name="star1" x="150" y="0" atlas="common.atlas" frame="facebook_logo"   width="100" height="100" zIndex="2"/>
+        <image name="star1" x="200" y="0" atlas="common.atlas" frame="linkedin_logo"   width="100" height="100" zIndex="1"/>
+    </group>
+</group>

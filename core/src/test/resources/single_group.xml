@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group>
+    <image name="image1"/>
+    <image name="image2"></image>
+    <label name="label1" text="ilkin" fontName="helvetica.fnt" fontColor="DFDFDF" wrap="true" align="center" shadow="true" shadowColor="000000"/>
+    <button name="button1" atlas="test.atlas" frameUp="buttonUp" frameDown="buttonDown" frameDisabled="buttonDisabled" />
+    <button name="button2" textureSrcUp="buttonUpSrc" textureSrcDown="buttonDownSrc" textureSrcDisabled="buttonDisabledSrc" />
+    <textbutton name="textbutton1"
+                text="click me"
+                fontName="courier.fnt"
+                fontColor="000000"
+                fontScale="0.8"
+                labelPadding="1"
+                labelPaddingLeft="2"
+                labelPaddingRight="3"
+                labelPaddingTop="4"
+                labelPaddingBottom="5"/>
+</group>

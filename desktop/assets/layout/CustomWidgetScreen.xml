@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group>
+    <image name="background_image" atlas="common.atlas" frame="background" type="background"/>
+    <button name="backButton" x="10" y="420" atlas="common.atlas" frameUp="back_button" frameDown="back_buttonH"/>
+    <label name="progress_bar_description" x="0" y="100" width="800" align="center" wrap="true"
+           text="This is a custom progress bar widget." fontName="default_font.fnt" fontColor="000000"/>
+
+    <net.peakgames.libgdx.stagebuilder.core.demo.widgets.LoadingWidget name="loading_widget"/>
+
+    <!-- ProgressBarWidget is a custom widget. -->
+    <net.peakgames.libgdx.stagebuilder.core.demo.widgets.ProgressBarWidget
+            name="progressBar"
+            atlas="common.atlas"
+            bgImageFrame="progressbar_background"
+            progressImageFrame="progressbar_foreground"
+            ninePatchLeft="6"
+            ninePatchRight="6"
+            progressImagePaddingLeft="6"
+            progressImagePaddingRight="6"
+            x="232"
+            y="40"
+            text="@string/connecting_please_wait"
+            fontName="default_font.fnt"
+            duration="4"
+            progressType="INFINITE"
+            active="true"/>
+</group>

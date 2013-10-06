@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group>
+    <image name="background_image" atlas="common.atlas" frame="background" type="background"/>
+    <button name="backButton" x="10" y="420" atlas="common.atlas" frameUp="back_button" frameDown="back_buttonH"/>
+
+    <label name="1" x="0" y="400" width="800"  align="center"  text="Label Samples (this title is centered)" fontName="default_font.fnt" fontColor="FF0000"/>
+
+    <label name="2" x="10" y="300" width="200"  wrap="true"
+           text="This is a long text. It is wraped. Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.."
+           fontName="default_font.fnt" fontColor="000000"/>
+
+    <label name="3" x="400" y="300" width="400"  align="center"  text="Yellow label 2x" fontScale="2" fontName="default_font.fnt" fontColor="ffff00"/>
+
+    <label name="3" x="400" y="100" width="400"  align="center"  text="Green label 4x" fontScale="4" fontName="default_font.fnt" fontColor="00ff00"/>
+
+</group>

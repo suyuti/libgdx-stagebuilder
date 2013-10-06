@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group name="root_group" x="10" y="20">
+    <image name="image1"/>
+    <group name="group1">
+        <image name="group_image1"/>
+        <image name="group_image2"/>
+        <image name="group_image3"/>
+        <group name="inner_group">
+            <image name="inner_group_image1"></image>
+            <image name="inner_group_image2"></image>
+        </group>
+    </group>
+    <image name="image2"></image>
+</group>

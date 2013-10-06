@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group name="root_group">
+    <group name="group1">
+        <net.peakgames.test.Slider min="0" max="100" increment="5"/>
+        <net.peakgames.test.ProgressBar text="@string/loading" backgroundColor="black"/>
+    </group>
+
+    <group name="group2">
+        <image name="image1"></image>
+        <com.badlogicgames.TestWidget testAttr="testValue" />
+        <image name="image2"></image>
+    </group>
+
+    <net.peakgames.test.ChatBubble animation="bounce" duration="2"/>
+</group>
