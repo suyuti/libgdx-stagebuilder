@@ -10,7 +10,7 @@
 
     <image name="androidLogo2" x="280" y="100" atlas="common.atlas" frame="androidlogo" rotation="30"/>
 
-    <image name="androidLogo2" x="400" y="0" atlas="common.atlas" frame="androidlogo" rotation="-30" scale="2"/>
+    <image name="androidLogo3" x="600" y="0" atlas="common.atlas" frame="androidlogo" rotation="-30" scale="2"/>
 
     <group name="starGroup" x="650" y="350">
         <!-- coordinates in a group are relative to group coordinates -->
@@ -28,4 +28,18 @@
         <image name="star1" x="150" y="0" atlas="common.atlas" frame="facebook_logo"   width="100" height="100" zIndex="2"/>
         <image name="star1" x="200" y="0" atlas="common.atlas" frame="linkedin_logo"   width="100" height="100" zIndex="1"/>
     </group>
+
+    <!-- Below images demonstrate the usage of screen alignment and screen padding... -->
+    <image name="androidLogoTop1"    screenAlign="top" x="400" atlas="common.atlas" frame="androidlogo" scale="0.3"/>
+    <image name="androidLogoTop2"    screenAlign="top" screenPaddingTop="30"  x="400" atlas="common.atlas" frame="androidlogo" scale="0.3"/>
+
+    <image name="androidLogoBottom1" screenAlign="bottom"  x="400" atlas="common.atlas" frame="androidlogo" scale="0.3"/>
+    <image name="androidLogoBottom2" screenAlign="bottom" screenPaddingBottom="30" x="400" atlas="common.atlas" frame="androidlogo" scale="0.3"/>
+
+    <image name="androidLogoRight1"  screenAlign="right"  y="240" atlas="common.atlas" frame="androidlogo" scale="0.3"/>
+    <image name="androidLogoRight2"  screenAlign="right"  screenPaddingRight="30" y="240" atlas="common.atlas" frame="androidlogo" scale="0.3"/>
+
+    <image name="androidLogoLeft1"   screenAlign="left"   y="240" atlas="common.atlas" frame="androidlogo" scale="0.3"/>
+    <image name="androidLogoLeft2"   screenAlign="left"   screenPaddingLeft="30" y="240" atlas="common.atlas" frame="androidlogo" scale="0.3"/>
+
 </group>

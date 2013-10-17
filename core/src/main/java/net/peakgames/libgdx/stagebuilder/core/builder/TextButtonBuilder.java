@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.esotericsoftware.tablelayout.Cell;
 import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
 import net.peakgames.libgdx.stagebuilder.core.assets.ResolutionHelper;
 import net.peakgames.libgdx.stagebuilder.core.model.BaseModel;
@@ -31,8 +33,8 @@ public class TextButtonBuilder extends ButtonBuilder {
         }
 
         TextButton textButton = new TextButton(textButtonModel.getText(), style);
-        setBasicProperties(model, textButton);
-        normalizeActorSize(textButton, up.getMinWidth(), up.getMinHeight());
+        normalizeModelSize(textButtonModel, up.getMinWidth(), up.getMinHeight());
+        setBasicProperties(textButtonModel, textButton);
 
         float positionMultiplier = resolutionHelper.getPositionMultiplier();
         textButton.padBottom(textButtonModel.getLabelPaddingBottom() * positionMultiplier);
@@ -41,18 +43,14 @@ public class TextButtonBuilder extends ButtonBuilder {
         textButton.padLeft(textButtonModel.getLabelPaddingLeft() * positionMultiplier);
 
         Label label = textButton.getLabel();
-        //TODO fontScale buyuk ise text button'un (vertical) ortasinda cikmiyor.
-        //setBasicProperties(model, label);
-        //normalizeActorSize(label, up.getMinWidth(), up.getMinHeight());
-        //label.setWidth(textButton.getWidth());
-        //label.setHeight(textButton.getHeight());
-        //label.setX(textButton.getX());
-        //label.setY(textButton.getY());
-
+        Cell labelCell = textButton.getLabelCell();
         if (textButtonModel.getFontScale() != 1) {
             label.setFontScale(font.getScaleX() * textButtonModel.getFontScale());
+            labelCell.bottom();
+            label.setAlignment(Align.center);
+            labelCell.height(textButton.getHeight());
+            textButton.debug();
         }
-
         return textButton;
     }
 }

@@ -1,6 +1,7 @@
 package net.peakgames.libgdx.stagebuilder.core.builder;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
@@ -52,7 +53,7 @@ public abstract class ActorBuilder {
     public abstract Actor build(BaseModel model);
 
     /**
-     * Width & height properties are updated by normalizeActorSize method.
+     * Width & height properties are updated by normalizeModelSize method.
      *
      * @param model model
      * @param actor actor
@@ -63,8 +64,7 @@ public abstract class ActorBuilder {
                 model.getY() * resolutionHelper.getPositionMultiplier(),
                 model.getWidth(),
                 model.getHeight());
-        actor.setOriginX(model.getOriginX());
-        actor.setOriginY(model.getOriginY());
+
         if (model.getScale() != 1) {
             actor.setScale(model.getScale(), model.getScale());
         } else {
@@ -82,7 +82,53 @@ public abstract class ActorBuilder {
             actor.setOrigin(actor.getWidth() / 2, actor.getHeight() / 2);
             actor.setRotation(model.getRotation());
         }
+
+        if (model.getOriginX() != 0) {
+            actor.setOriginX(model.getOriginX());
+        }
+
+        if (model.getOriginY() != 0) {
+            actor.setOriginY(model.getOriginY());
+        }
+
         actor.setName(model.getName());
+        Vector2 screenPos = calculateScreenPosition(model.getScreenAlignment(), model);
+        if (screenPos != null) {
+            actor.setPosition(screenPos.x, screenPos.y);
+        }
+    }
+
+    public Vector2 calculateScreenPosition(BaseModel.ScreenAlign screenAlign, BaseModel model) {
+        if (screenAlign == null) {
+            return null;
+        }
+        float y = model.getY() * resolutionHelper.getPositionMultiplier();
+        float x = model.getX() * resolutionHelper.getPositionMultiplier();
+
+        switch (screenAlign) {
+            case top:
+                //after building all actors stage position will be set to gameAreaPosition.
+                y = resolutionHelper.getScreenHeight() - model.getScaledHeight() - resolutionHelper.getGameAreaPosition().y;
+                y = y - model.getScreenPaddingTop() * resolutionHelper.getPositionMultiplier();
+                break;
+            case bottom:
+                y = -resolutionHelper.getGameAreaPosition().y;
+                y = y + model.getScreenPaddingBottom() * resolutionHelper.getPositionMultiplier();
+                break;
+
+            case left:
+                x = -resolutionHelper.getGameAreaPosition().x;
+                x = x + model.getScreenPaddingLeft() * resolutionHelper.getPositionMultiplier();
+                break;
+
+            case right:
+                x = resolutionHelper.getScreenWidth() - model.getScaledWidth() - resolutionHelper.getGameAreaPosition().x;
+                x = x - model.getScreenPaddingRight() * resolutionHelper.getPositionMultiplier();
+                break;
+            default:
+                break;
+        }
+        return new Vector2(x, y);
     }
 
     /**
@@ -94,18 +140,18 @@ public abstract class ActorBuilder {
      * @param defaultWidth  if width of the actor is not specified in layout file then defaultWidth is multiplied with sizeMultiplier
      * @param defaultHeight if height of the actor is not specified in layout file then defaultHeight is multiplied with sizeMultiplier
      */
-    protected void normalizeActorSize(Actor actor, float defaultWidth, float defaultHeight) {
-        float width = actor.getWidth();
-        float height = actor.getHeight();
+    protected void normalizeModelSize(BaseModel model, float defaultWidth, float defaultHeight) {
+        float width = model.getWidth();
+        float height = model.getHeight();
         if (width == 0) {
-            actor.setWidth(defaultWidth * resolutionHelper.getSizeMultiplier());
+            model.setWidth(defaultWidth * resolutionHelper.getSizeMultiplier());
         } else {
-            actor.setWidth(width * resolutionHelper.getPositionMultiplier());
+            model.setWidth(width * resolutionHelper.getPositionMultiplier());
         }
         if (height == 0) {
-            actor.setHeight(defaultHeight * resolutionHelper.getSizeMultiplier());
+            model.setHeight(defaultHeight * resolutionHelper.getSizeMultiplier());
         } else {
-            actor.setHeight(height * resolutionHelper.getPositionMultiplier());
+            model.setHeight(height * resolutionHelper.getPositionMultiplier());
         }
     }
 

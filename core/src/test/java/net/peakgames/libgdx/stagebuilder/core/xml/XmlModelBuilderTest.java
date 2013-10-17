@@ -144,4 +144,16 @@ public class XmlModelBuilderTest {
         assertEquals("net.peakgames.test.ChatBubble", chatBubble.getKlass());
 
     }
+
+    @Test
+    public void testScreenAlignment() throws Exception {
+        List<BaseModel> models = builder.buildModels("screen_align_test.xml");
+        GroupModel root = (GroupModel) models.get(0);
+        assertEquals(BaseModel.ScreenAlign.top, root.getChildren().get(0).getScreenAlignment());
+        assertEquals(BaseModel.ScreenAlign.top, root.getChildren().get(5).getScreenAlignment());
+
+        assertEquals(BaseModel.ScreenAlign.left, root.getChildren().get(1).getScreenAlignment());
+        assertEquals(BaseModel.ScreenAlign.right, root.getChildren().get(3).getScreenAlignment());
+        assertEquals(BaseModel.ScreenAlign.bottom, root.getChildren().get(4).getScreenAlignment());
+    }
 }

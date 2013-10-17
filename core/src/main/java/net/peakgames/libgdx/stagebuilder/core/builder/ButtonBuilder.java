@@ -30,8 +30,8 @@ public class ButtonBuilder extends ActorBuilder {
         if (disabled != null) {
             button.getStyle().disabled = disabled;
         }
+        normalizeModelSize(buttonModel, up.getMinWidth(), up.getMinHeight());
         setBasicProperties(model, button);
-        normalizeActorSize(button, up.getMinWidth(), up.getMinHeight());
         return button;
     }
 

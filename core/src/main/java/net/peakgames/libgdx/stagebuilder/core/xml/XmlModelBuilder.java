@@ -174,6 +174,11 @@ public class XmlModelBuilder {
         model.setVisible(Boolean.valueOf(XmlHelper.readStringAttribute(xmlParser, "visible", "true")));
         model.setColor(XmlHelper.readStringAttribute(xmlParser, "color", null));
         model.setRotation(XmlHelper.readFloatAttribute(xmlParser, "rotation", 0.0f));
+        model.setScreenAlignment(XmlHelper.readStringAttribute(xmlParser, "screenAlign", null));
+        model.setScreenPaddingTop(XmlHelper.readFloatAttribute(xmlParser, "screenPaddingTop", 0.0f));
+        model.setScreenPaddingBottom(XmlHelper.readFloatAttribute(xmlParser, "screenPaddingBottom", 0.0f));
+        model.setScreenPaddingLeft(XmlHelper.readFloatAttribute(xmlParser, "screenPaddingLeft", 0.0f));
+        model.setScreenPaddingRight(XmlHelper.readFloatAttribute(xmlParser, "screenPaddingRight", 0.0f));
     }
 
 }

@@ -1,4 +1,4 @@
-package net.peakgames.libgdx.stagebuilder.core.xml;
+package net.peakgames.libgdx.stagebuilder.core.builder;
 
 
 import com.badlogic.gdx.scenes.scene2d.utils.Align;

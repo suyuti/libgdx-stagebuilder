@@ -18,8 +18,9 @@ public class MenuScreen extends DemoScreen {
         findButton("button_screen").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ButtonScreen buttonScreen = new ButtonScreen(game);
-                game.addScreen(buttonScreen);
+                ButtonScreen screen = new ButtonScreen(game);
+                game.addScreen(screen);
+
             }
         });
 

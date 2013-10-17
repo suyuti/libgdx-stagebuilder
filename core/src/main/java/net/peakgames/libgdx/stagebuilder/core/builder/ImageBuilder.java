@@ -28,21 +28,17 @@ public class ImageBuilder extends ActorBuilder {
             image = createFromTextureAtlas(imageModel);
         }
 
-        setBasicProperties(model, image);
-        normalizeActorSize(image,
+        normalizeModelSize(imageModel,
                 image.getDrawable().getMinWidth(),
                 image.getDrawable().getMinHeight());
 
-        if (image.getWidth() == 0) {
-            image.setWidth(image.getDrawable().getMinWidth());
-        }
-        if (image.getHeight() == 0) {
-            image.setHeight(image.getDrawable().getMinHeight());
-        }
+
+        setBasicProperties(model, image);
 
         if (ImageModel.TYPE_BACKGROUND.equals(imageModel.getType())) {
             updateBackgroundImagePosition(image);
         }
+
         return image;
     }
 

@@ -10,8 +10,8 @@ import java.util.List;
 
 public class StageBuilderTestDesktop {
     public static void main(String[] args) {
-        int width = 480;
-        int height = 320;
+        int width = 800;
+        int height = 600;
 
         List<Vector2> supportedScreenResolutions = new LinkedList<Vector2>();
         supportedScreenResolutions.add(new Vector2(800, 480));

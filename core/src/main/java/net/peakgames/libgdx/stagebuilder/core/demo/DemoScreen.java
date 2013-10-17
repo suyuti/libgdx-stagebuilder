@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import net.peakgames.libgdx.stagebuilder.core.AbstractGame;
 import net.peakgames.libgdx.stagebuilder.core.AbstractScreen;
@@ -34,6 +35,7 @@ public class DemoScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
+
         debugRenderer.setProjectionMatrix(camera.combined);
 
         debugRenderer.begin(ShapeRenderer.ShapeType.Line);
@@ -43,6 +45,9 @@ public class DemoScreen extends AbstractScreen {
         debugRenderer.rect(gameAreaPosition.x, gameAreaPosition.y, gameAreaBounds.x, gameAreaBounds.y);
         debugRenderer.rect(gameAreaPosition.x+1, gameAreaPosition.y+1, gameAreaBounds.x-2, gameAreaBounds.y-2);
         debugRenderer.end();
+
+
+        Table.drawDebug(stage);
 
     }
 }

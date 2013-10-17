@@ -17,6 +17,23 @@ public abstract class BaseModel {
     private boolean isVisible;
     private String color;
     private float rotation;
+    private ScreenAlign screenAlignment = null;
+    /**
+     * used only if screen alignment is "top"
+     */
+    private float screenPaddingTop;
+    /**
+     * used only if screen alignment is "bottom"
+     */
+    private float screenPaddingBottom;
+    /**
+     * used only if screen alignment is "right"
+     */
+    private float screenPaddingRight;
+    /**
+     * used only if screen alignment is "left"
+     */
+    private float screenPaddingLeft;
 
     @Override
     public String toString() {
@@ -133,5 +150,77 @@ public abstract class BaseModel {
 
     public void setScale(float scale) {
         this.scale = scale;
+    }
+
+    public ScreenAlign getScreenAlignment() {
+        return screenAlignment;
+    }
+
+    public void setScreenAlignment(String s) {
+        if (s != null) {
+            this.screenAlignment = ScreenAlign.valueOf(s.toLowerCase());
+        }
+    }
+
+    public void setScreenAlignment(ScreenAlign screenAlignment) {
+        this.screenAlignment = screenAlignment;
+    }
+
+    public float getScreenPaddingTop() {
+        return screenPaddingTop;
+    }
+
+    public void setScreenPaddingTop(float screenPaddingTop) {
+        this.screenPaddingTop = screenPaddingTop;
+    }
+
+    public float getScreenPaddingBottom() {
+        return screenPaddingBottom;
+    }
+
+    public void setScreenPaddingBottom(float screenPaddingBottom) {
+        this.screenPaddingBottom = screenPaddingBottom;
+    }
+
+    public float getScreenPaddingRight() {
+        return screenPaddingRight;
+    }
+
+    public void setScreenPaddingRight(float screenPaddingRight) {
+        this.screenPaddingRight = screenPaddingRight;
+    }
+
+    public float getScreenPaddingLeft() {
+        return screenPaddingLeft;
+    }
+
+    public void setScreenPaddingLeft(float screenPaddingLeft) {
+        this.screenPaddingLeft = screenPaddingLeft;
+    }
+
+    public float getScaledHeight() {
+        if (this.scaleY != 1) {
+            return this.height * scaleY;
+        }
+
+        if (this.scale != 1) {
+            return this.height * scale;
+        }
+        return this.height;
+    }
+
+    public float getScaledWidth() {
+        if (this.scaleX != 1) {
+            return this.width * scaleX;
+        }
+
+        if (this.scale != 1) {
+            return this.width * scale;
+        }
+        return this.width;
+    }
+
+    public enum ScreenAlign {
+        top, bottom, left, right
     }
 }

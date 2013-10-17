@@ -23,8 +23,9 @@ public class LabelBuilder extends ActorBuilder {
         Color color = labelModel.getFontColor() == null ? DEFAULT_LABEL_COLOR : Color.valueOf(labelModel.getFontColor());
         Label.LabelStyle style = new Label.LabelStyle(assets.getFont(labelModel.getFontName()), color);
         Label label = new Label(labelModel.getText(), style);
+
+        normalizeModelSize(labelModel, 0, 0);
         setBasicProperties(model, label);
-        normalizeActorSize(label, 0, 0);
 
         label.setAlignment(calculateAlignment(labelModel.getAlignment()));
         label.setWrap(labelModel.isWrap());
