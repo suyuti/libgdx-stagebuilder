@@ -1,5 +1,6 @@
 package net.peakgames.libgdx.stagebuilder.core.xml;
 
+import com.badlogic.gdx.files.FileHandle;
 import net.peakgames.libgdx.stagebuilder.core.model.*;
 import org.xmlpull.v1.XmlPullParser;
 
@@ -15,8 +16,8 @@ public class XmlModelBuilder {
     public static final String GROUP_TAG = "Group";
     public static final String LOCALIZED_STRING_PREFIX = "@string/";
 
-    public List<BaseModel> buildModels(String filePath) throws Exception {
-        XmlPullParser xmlParser = XmlHelper.getXmlParser(filePath);
+    public List<BaseModel> buildModels(FileHandle fileHandle) throws Exception {
+        XmlPullParser xmlParser = XmlHelper.getXmlParser(fileHandle);
         return buildModels(xmlParser);
     }
 

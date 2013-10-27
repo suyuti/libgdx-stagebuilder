@@ -23,7 +23,7 @@ public class ExternalGroupModelBuilder extends ActorBuilder {
     public Actor build(BaseModel model) {
         ExternalGroupModel externalGroupModel = (ExternalGroupModel) model;
         try {
-            Group group = stageBuilder.buildGroup("layout/"+ externalGroupModel.getFileName());
+            Group group = stageBuilder.buildGroup(externalGroupModel.getFileName());
             setBasicProperties(model, group);
             return group;
         } catch (Exception e) {

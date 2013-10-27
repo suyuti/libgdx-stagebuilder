@@ -45,11 +45,10 @@ public class TextButtonBuilder extends ButtonBuilder {
         Label label = textButton.getLabel();
         Cell labelCell = textButton.getLabelCell();
         if (textButtonModel.getFontScale() != 1) {
-            label.setFontScale(font.getScaleX() * textButtonModel.getFontScale());
-            labelCell.bottom();
-            label.setAlignment(Align.center);
             labelCell.height(textButton.getHeight());
-            textButton.debug();
+            labelCell.bottom();
+            label.setFontScale(font.getScaleX() * textButtonModel.getFontScale());
+            label.setAlignment(Align.center);
         }
         return textButton;
     }

@@ -2,6 +2,7 @@ package net.peakgames.libgdx.stagebuilder.core.xml;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
+import com.badlogic.gdx.files.FileHandle;
 import net.peakgames.libgdx.stagebuilder.core.model.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -27,9 +28,13 @@ public class XmlModelBuilderTest {
         builder = new XmlModelBuilder();
     }
 
+    private FileHandle fileHandle(String fileName) {
+        return Gdx.files.internal("layout/" + fileName);
+    }
+
     @Test
     public void testSingleItemThatIsNotAGroup() throws Exception {
-        List<BaseModel> models = builder.buildModels("single_image.xml");
+        List<BaseModel> models = builder.buildModels(fileHandle("single_image.xml"));
         assertEquals(1, models.size());
         ImageModel image = (ImageModel)models.get(0);
         assertEquals("myImage", image.getName());
@@ -43,7 +48,7 @@ public class XmlModelBuilderTest {
 
     @Test
     public void testSingleGroupLayout() throws Exception {
-        List<BaseModel> models = builder.buildModels("single_group.xml");
+        List<BaseModel> models = builder.buildModels(fileHandle("single_group.xml"));
         assertEquals(1, models.size());
         GroupModel group = (GroupModel)models.get(0);
         List<BaseModel> children = group.getChildren();
@@ -89,7 +94,7 @@ public class XmlModelBuilderTest {
 
     @Test
     public void testNestedGroups() throws Exception {
-        List<BaseModel> models = builder.buildModels("nested_groups.xml");
+        List<BaseModel> models = builder.buildModels(fileHandle("nested_groups.xml"));
         GroupModel root = (GroupModel) models.get(0);
         assertEquals("root_group", root.getName());
         assertEquals(3, root.getChildren().size());
@@ -120,7 +125,7 @@ public class XmlModelBuilderTest {
 
     @Test
     public void testCustomWidgets() throws Exception {
-        List<BaseModel> models = builder.buildModels("custom_widgets.xml");
+        List<BaseModel> models = builder.buildModels(fileHandle("custom_widgets.xml"));
         GroupModel root = (GroupModel) models.get(0);
         assertEquals("root_group", root.getName());
         assertEquals(3, root.getChildren().size());
@@ -147,7 +152,7 @@ public class XmlModelBuilderTest {
 
     @Test
     public void testScreenAlignment() throws Exception {
-        List<BaseModel> models = builder.buildModels("screen_align_test.xml");
+        List<BaseModel> models = builder.buildModels(fileHandle("screen_align_test.xml"));
         GroupModel root = (GroupModel) models.get(0);
         assertEquals(BaseModel.ScreenAlign.top, root.getChildren().get(0).getScreenAlignment());
         assertEquals(BaseModel.ScreenAlign.top, root.getChildren().get(5).getScreenAlignment());

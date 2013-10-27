@@ -39,7 +39,7 @@ public abstract class AbstractScreen implements Screen {
         graphics = Gdx.graphics;
 
         StageBuilder stageBuilder = new StageBuilder(game.getAssetsInterface(), game.getResolutionHelper(), new DemoLocalizationService());
-        stage = stageBuilder.build(getFilePath(), width, height, keepAspectRatio);
+        stage = stageBuilder.build(getFileName(), width, height, keepAspectRatio);
 
         Gdx.input.setInputProcessor(this.stage);
 
@@ -55,8 +55,8 @@ public abstract class AbstractScreen implements Screen {
         this.assetManager = game.getAssetsInterface().getAssetMAnager();
     }
 
-    private String getFilePath() {
-        return "layout/" + this.getClass().getSimpleName() + ".xml";
+    private String getFileName() {
+        return this.getClass().getSimpleName() + ".xml";
     }
 
     public abstract void unloadAssets();

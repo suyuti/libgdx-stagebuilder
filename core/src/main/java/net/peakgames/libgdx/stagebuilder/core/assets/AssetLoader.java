@@ -79,7 +79,7 @@ public class AssetLoader {
                     } else if (BitmapFont.class.equals(type)) {
                         BitmapFontLoader.BitmapFontParameter param = new BitmapFontLoader.BitmapFontParameter();
                         param.maxFilter = Texture.TextureFilter.Linear;
-                        param.minFitler = Texture.TextureFilter.Linear;
+                        param.minFilter = Texture.TextureFilter.Linear;
                         param.loadedCallback = loadedCallbackManager;
                         assetManager.load(fileName, BitmapFont.class, param);
 

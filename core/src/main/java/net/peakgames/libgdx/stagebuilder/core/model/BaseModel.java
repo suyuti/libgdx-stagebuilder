@@ -10,9 +10,9 @@ public abstract class BaseModel {
     private float height;
     private float originX;
     private float originY;
-    private float scaleX;
-    private float scaleY;
-    private float scale;
+    private float scaleX = 1f;
+    private float scaleY = 1f;
+    private float scale = 1f;
     private int zIndex;
     private boolean isVisible;
     private String color;

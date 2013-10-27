@@ -1,8 +1,10 @@
 package net.peakgames.libgdx.stagebuilder.core.builder;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.sun.org.apache.bcel.internal.generic.LADD;
 import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
 import net.peakgames.libgdx.stagebuilder.core.assets.ResolutionHelper;
 import net.peakgames.libgdx.stagebuilder.core.model.*;
@@ -16,6 +18,10 @@ import java.util.Map;
 public class StageBuilder {
     public static final String ROOT_GROUP_NAME = "AbsoluteLayoutRootGroup";
     public static final String TAG = StageBuilder.class.getSimpleName();
+    public static final String LANDSCAPE_LAYOUT_FOLDER = "layout-land";
+    public static final String PORTRAIT_LAYOUT_FOLDER = "layout-port";
+    public static final String DEFAULT_LAYOUT_FOLDER = "layout";
+
     private Map<Class<? extends BaseModel>, ActorBuilder> builders = new HashMap<Class<? extends BaseModel>, ActorBuilder>();
     private AssetsInterface assets;
     private ResolutionHelper resolutionHelper;
@@ -27,11 +33,15 @@ public class StageBuilder {
         this.localizationService = localizationService;
 
         registerWidgetBuilders(assets);
+    }
+
+    public void switchOrientation() {
 
     }
 
     /**
      * There must be a widget builder for every type of widget model. Models represents widget data and builders use this data to create scene2d actors.
+     *
      * @param assets assets interface.
      */
     private void registerWidgetBuilders(AssetsInterface assets) {
@@ -44,9 +54,9 @@ public class StageBuilder {
         builders.put(ExternalGroupModel.class, new ExternalGroupModelBuilder(this.assets, this.resolutionHelper, this.localizationService, this));
     }
 
-    public Group buildGroup(String filePath) throws Exception {
+    public Group buildGroup(String fileName) throws Exception {
         XmlModelBuilder xmlModelBuilder = new XmlModelBuilder();
-        List<BaseModel> modelList = xmlModelBuilder.buildModels(filePath);
+        List<BaseModel> modelList = xmlModelBuilder.buildModels(getLayoutFile(fileName));
         GroupModel groupModel = (GroupModel) modelList.get(0);
         Group group = new Group();
         for (BaseModel model : groupModel.getChildren()) {
@@ -56,10 +66,10 @@ public class StageBuilder {
         return group;
     }
 
-    public Stage build(String filePath, float width, float height, boolean keepAspectRatio) {
+    public Stage build(String fileName, float width, float height, boolean keepAspectRatio) {
         try {
             XmlModelBuilder xmlModelBuilder = new XmlModelBuilder();
-            List<BaseModel> modelList = xmlModelBuilder.buildModels(filePath);
+            List<BaseModel> modelList = xmlModelBuilder.buildModels(getLayoutFile(fileName));
             GroupModel groupModel = (GroupModel) modelList.get(0);
             Stage stage = new Stage(width, height, keepAspectRatio);
             addActorsToStage(stage, groupModel.getChildren());
@@ -79,4 +89,33 @@ public class StageBuilder {
             stage.getRoot().addActor(builder.build(model));
         }
     }
+
+    public FileHandle getLayoutFile(String fileName) {
+        boolean isLandscape = resolutionHelper.getScreenWidth() > resolutionHelper.getScreenHeight();
+        if (isLandscape) {
+            String path = LANDSCAPE_LAYOUT_FOLDER + "/" + fileName;
+            FileHandle fileHandle = Gdx.files.internal(path);
+            if (fileHandle.exists()) {
+                return fileHandle;
+            }
+        } else {
+            String path = PORTRAIT_LAYOUT_FOLDER + "/" + fileName;
+            FileHandle fileHandle = Gdx.files.internal(path);
+            if (fileHandle.exists()) {
+                return fileHandle;
+            }
+        }
+
+        String path = DEFAULT_LAYOUT_FOLDER + "/" + fileName;
+        return Gdx.files.internal(path);
+    }
+
+    private boolean doesFileExist(String path) {
+        try {
+            return Gdx.files.internal(path).exists();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

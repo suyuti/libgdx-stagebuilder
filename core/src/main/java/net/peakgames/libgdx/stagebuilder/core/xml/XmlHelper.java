@@ -53,11 +53,10 @@ public class XmlHelper {
 		return Gdx.files.internal(sValue);
 	}
 	
-	public static XmlPullParser getXmlParser(String path) {
+	public static XmlPullParser getXmlParser(FileHandle fileHandle) {
 		try {
-			FileHandle handle = Gdx.files.internal(path);
 			XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
-			parser.setInput(handle.read(), null);
+			parser.setInput(fileHandle.read(), null);
 			return parser;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
