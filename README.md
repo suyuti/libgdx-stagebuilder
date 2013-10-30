@@ -6,6 +6,7 @@ This is a library project for building libgdx stages (screens) from xml files.
 * Allows grouping of widgets.
 * External xml files can be included. (scene2d groups can be reused across screens)
 * Multiple screen size support.
+* Screen orientation change support
 
 ##Basic scene2d widget construction
 
@@ -47,7 +48,10 @@ This is a library project for building libgdx stages (screens) from xml files.
 **Popup.xml** file will be included and a scene2d group will be created with the information defined in Popup.xml file. The group will be positioned at 200,140 and will be hidden.
 
 ##Multiple screen size support
+TODO incomplete documentation
 
+##Screen orientation change support
+TODO incomplete documentation
 
 #Demo
 There is a demo application in **stagebuilder-desktop** project.
