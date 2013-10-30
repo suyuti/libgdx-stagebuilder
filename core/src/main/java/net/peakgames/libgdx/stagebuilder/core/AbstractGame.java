@@ -23,6 +23,7 @@ public abstract class AbstractGame implements ApplicationListener {
     final private Stack<Screen> screens = new Stack<Screen>();
     private int width;
     private int height;
+    private List<Vector2> supportedResolutions;
     private Screen topScreen = NULL_SCREEN;
     private ResolutionHelper resolutionHelper;
     private AssetsInterface assetsInterface;
@@ -31,6 +32,7 @@ public abstract class AbstractGame implements ApplicationListener {
     public void initialize(int width, int height, List<Vector2> supportedResolutions) {
         this.width = width;
         this.height = height;
+        this.supportedResolutions = supportedResolutions;
         fileHandleResolver = new ScreenResolutionFileHandleResolver(this.width, supportedResolutions);
         this.resolutionHelper = new ResolutionHelper(TARGET_WIDTH, TARGET_HEIGHT, width, height, fileHandleResolver.findBestResolution().x);
         this.assetsInterface = new Assets(fileHandleResolver, resolutionHelper);
@@ -42,8 +44,21 @@ public abstract class AbstractGame implements ApplicationListener {
     }
 
     @Override
-    public void resize(int width, int height) {
-        this.topScreen.resize(width, height);
+    public void resize(int newWidth, int newHeight) {
+        if (this.width == newWidth && this.height == newHeight) {
+            return;
+        }
+        this.width = newWidth;
+        this.height = newHeight;
+        fileHandleResolver = new ScreenResolutionFileHandleResolver(this.width, supportedResolutions);
+        this.resolutionHelper = new ResolutionHelper(
+                this.resolutionHelper.getTargetWidth(),
+                this.resolutionHelper.getTargetHeight(),
+                this.width,
+                this.height,
+                this.fileHandleResolver.findBestResolution().x);
+        //TODO farkli orientation'lar farkli image dizinleri kullanmak isterse ne yapacagiz...
+        this.topScreen.resize(this.width, this.height);
     }
 
     @Override
