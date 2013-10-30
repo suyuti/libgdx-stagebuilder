@@ -27,13 +27,15 @@ public abstract class AbstractScreen implements Screen {
     protected AbstractGame game;
     protected OrthographicCamera camera;
     private AssetManager assetManager;
+    private float width;
+    private float height;
 
     public AbstractScreen(AbstractGame game) {
         if (game == null) {
             return;
         }
-        float width = game.getWidth();
-        float height = game.getHeight();
+        this.width = game.getWidth();
+        this.height = game.getHeight();
 
         this.game = game;
         graphics = Gdx.graphics;
@@ -73,8 +75,10 @@ public abstract class AbstractScreen implements Screen {
     }
 
     @Override
-    public void resize(int width, int height) {
-        Gdx.app.log(TAG, "resize " + width + "x" + height);
+    public void resize(int newWidth, int newHeight) {
+        Gdx.app.log(TAG, "resize " + newWidth + " x " + newHeight);
+        //TODO stage'in yeniden olusmasi lazim.....
+        //TODO orientation degisimini burada yakaliyoruz. stage yeniden build edildigi icin listener'lari yeniden vermek lazim.
     }
 
     @Override
