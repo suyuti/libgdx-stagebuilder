@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group>
+    <image name="background_image" atlas="common.atlas" frame="background" type="background"/>
+
+    <button name="backButton" x="10" y="420" atlas="common.atlas" frameUp="back_button" frameDown="back_buttonH"/>
+
+    <image name="peakLogo" x="309" y="380" atlas="common.atlas" frame="peaklogo"/>
+
+</group>

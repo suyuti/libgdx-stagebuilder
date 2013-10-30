@@ -4,7 +4,6 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import net.peakgames.libgdx.stagebuilder.core.assets.Assets;
 import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
 import net.peakgames.libgdx.stagebuilder.core.assets.ResolutionHelper;
@@ -51,13 +50,18 @@ public abstract class AbstractGame implements ApplicationListener {
         this.width = newWidth;
         this.height = newHeight;
         fileHandleResolver = new ScreenResolutionFileHandleResolver(this.width, supportedResolutions);
+        float targetWidth = TARGET_WIDTH;
+        float targetHeight = TARGET_HEIGHT;
+        if (this.height > this.width) {
+            targetWidth = TARGET_HEIGHT;
+            targetHeight = TARGET_WIDTH;
+        }
         this.resolutionHelper = new ResolutionHelper(
-                this.resolutionHelper.getTargetWidth(),
-                this.resolutionHelper.getTargetHeight(),
+                targetWidth,
+                targetHeight,
                 this.width,
                 this.height,
                 this.fileHandleResolver.findBestResolution().x);
-        //TODO farkli orientation'lar farkli image dizinleri kullanmak isterse ne yapacagiz...
         this.topScreen.resize(this.width, this.height);
     }
 
@@ -110,7 +114,6 @@ public abstract class AbstractGame implements ApplicationListener {
 
     private void displayTopScreen() {
         this.topScreen.show();
-        this.topScreen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     /**
@@ -177,6 +180,14 @@ public abstract class AbstractGame implements ApplicationListener {
         return this.assetsInterface;
     }
 
+    public ResolutionHelper getResolutionHelper() {
+        return this.resolutionHelper;
+    }
+
+    public Vector2 getBestResolution() {
+        return this.fileHandleResolver.findBestResolution();
+    }
+
     private static class NullScreen extends AbstractScreen {
 
         public NullScreen(AbstractGame game) {
@@ -186,14 +197,6 @@ public abstract class AbstractGame implements ApplicationListener {
         @Override
         public void unloadAssets() {
         }
-    }
-
-    public ResolutionHelper getResolutionHelper() {
-        return this.resolutionHelper;
-    }
-
-    public Vector2 getBestResolution() {
-        return this.fileHandleResolver.findBestResolution();
     }
 }
 

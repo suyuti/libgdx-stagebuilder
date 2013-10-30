@@ -27,19 +27,23 @@ public abstract class AbstractScreen implements Screen {
     protected AbstractGame game;
     protected OrthographicCamera camera;
     private AssetManager assetManager;
-    private float width;
-    private float height;
 
     public AbstractScreen(AbstractGame game) {
         if (game == null) {
             return;
         }
-        this.width = game.getWidth();
-        this.height = game.getHeight();
 
         this.game = game;
         graphics = Gdx.graphics;
 
+        createStage(game);
+
+        this.assetManager = game.getAssetsInterface().getAssetMAnager();
+    }
+
+    private void createStage(AbstractGame game) {
+        float width = game.getWidth();
+        float height = game.getHeight();
         StageBuilder stageBuilder = new StageBuilder(game.getAssetsInterface(), game.getResolutionHelper(), new DemoLocalizationService());
         stage = stageBuilder.build(getFileName(), width, height, keepAspectRatio);
 
@@ -53,8 +57,6 @@ public abstract class AbstractScreen implements Screen {
 
         spriteBatch = stage.getSpriteBatch();
         spriteBatch.setProjectionMatrix(camera.combined);
-
-        this.assetManager = game.getAssetsInterface().getAssetMAnager();
     }
 
     private String getFileName() {
@@ -77,7 +79,7 @@ public abstract class AbstractScreen implements Screen {
     @Override
     public void resize(int newWidth, int newHeight) {
         Gdx.app.log(TAG, "resize " + newWidth + " x " + newHeight);
-        //TODO stage'in yeniden olusmasi lazim.....
+        createStage(this.game);
         //TODO orientation degisimini burada yakaliyoruz. stage yeniden build edildigi icin listener'lari yeniden vermek lazim.
     }
 
@@ -125,9 +127,4 @@ public abstract class AbstractScreen implements Screen {
     public TextButton findTextButton(String name) {
         return (TextButton) stage.getRoot().findActor(name);
     }
-
-    public void addStageAction(Action action) {
-        stage.addAction(action);
-    }
-
 }

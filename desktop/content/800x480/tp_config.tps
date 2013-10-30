@@ -152,7 +152,6 @@
             <filename>androidlogo.png</filename>
             <filename>back_button.png</filename>
             <filename>back_buttonH.png</filename>
-            <filename>background.jpg</filename>
             <filename>cancel_button.png</filename>
             <filename>facebook_logo.png</filename>
             <filename>google_plus_logo.png</filename>
@@ -168,6 +167,7 @@
             <filename>star.png</filename>
             <filename>twitter_logo.png</filename>
             <filename>black_square.png</filename>
+            <filename>background.jpg</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

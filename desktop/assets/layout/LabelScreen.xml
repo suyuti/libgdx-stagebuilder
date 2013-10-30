@@ -7,7 +7,7 @@
 
     <label name="2" x="10" y="300" width="200"  wrap="true"
            text="This is a long text. It is wraped. Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.."
-           fontName="default_font.fnt" fontColor="000000"/>
+           fontName="default_font.fnt" fontColor="ffffff"/>
 
     <label name="3" x="400" y="300" width="400"  align="center"  text="Yellow label 2x" fontScale="2" fontName="default_font.fnt" fontColor="ffff00"/>
 
