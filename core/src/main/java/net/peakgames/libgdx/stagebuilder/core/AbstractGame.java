@@ -28,10 +28,12 @@ public abstract class AbstractGame implements ApplicationListener {
     private AssetsInterface assetsInterface;
     private ScreenResolutionFileHandleResolver fileHandleResolver;
 
-    public void initialize(int width, int height, List<Vector2> supportedResolutions) {
+    public abstract List<Vector2> getSupportedResolutions();
+
+    public void initialize(int width, int height) {
         this.width = width;
         this.height = height;
-        this.supportedResolutions = supportedResolutions;
+        this.supportedResolutions = getSupportedResolutions();
         fileHandleResolver = new ScreenResolutionFileHandleResolver(this.width, supportedResolutions);
         this.resolutionHelper = new ResolutionHelper(TARGET_WIDTH, TARGET_HEIGHT, width, height, fileHandleResolver.findBestResolution().x);
         this.assetsInterface = new Assets(fileHandleResolver, resolutionHelper);

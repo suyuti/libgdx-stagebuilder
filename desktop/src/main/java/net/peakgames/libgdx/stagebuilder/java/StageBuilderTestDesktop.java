@@ -13,16 +13,13 @@ public class StageBuilderTestDesktop {
         int width = 800;
         int height = 480;
 
-        List<Vector2> supportedScreenResolutions = new LinkedList<Vector2>();
-        supportedScreenResolutions.add(new Vector2(800, 480));
-
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.useGL20 = true;
         config.width = width;
         config.height = height;
 
         StageBuilderDemo demo = new StageBuilderDemo();
-        demo.initialize(width, height, supportedScreenResolutions);
+        demo.initialize(width, height);
 
         new LwjglApplication(demo, config);
     }
