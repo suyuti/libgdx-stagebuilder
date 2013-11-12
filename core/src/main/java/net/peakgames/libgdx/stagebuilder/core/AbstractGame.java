@@ -11,6 +11,7 @@ import net.peakgames.libgdx.stagebuilder.core.assets.ScreenResolutionFileHandleR
 
 import java.util.EmptyStackException;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 public abstract class AbstractGame implements ApplicationListener {
@@ -149,6 +150,11 @@ public abstract class AbstractGame implements ApplicationListener {
         this.topScreen = getTopScreen();
 
         displayTopScreen();
+    }
+
+    public void setScreen(Screen screen, Map<String, String> parameters) {
+        ((AbstractScreen) screen).setParameters(parameters);
+        setScreen(screen);
     }
 
     public Stack<Screen> getScreens() {

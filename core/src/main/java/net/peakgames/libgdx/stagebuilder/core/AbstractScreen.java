@@ -17,6 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import net.peakgames.libgdx.stagebuilder.core.builder.StageBuilder;
 import net.peakgames.libgdx.stagebuilder.core.demo.DemoLocalizationService;
 
+import java.util.Map;
+
 public abstract class AbstractScreen implements Screen {
 
     private static final boolean keepAspectRatio = true;
@@ -27,6 +29,10 @@ public abstract class AbstractScreen implements Screen {
     protected AbstractGame game;
     protected OrthographicCamera camera;
     private AssetManager assetManager;
+    /**
+     * parameters map that is used to pass configuration data for screen.
+     */
+    protected Map<String, String> parameters;
 
     public AbstractScreen(AbstractGame game) {
         if (game == null) {
@@ -110,6 +116,10 @@ public abstract class AbstractScreen implements Screen {
     @Override
     public void dispose() {
         Gdx.app.log(TAG, "dispose");
+    }
+
+    void setParameters(Map<String, String> parameters) {
+        this.parameters = parameters;
     }
 
     public Image findImage(String name) {
