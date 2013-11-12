@@ -10,12 +10,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import net.peakgames.libgdx.stagebuilder.core.AbstractGame;
 import net.peakgames.libgdx.stagebuilder.core.AbstractScreen;
 
-public class DemoScreen extends AbstractScreen {
+public abstract class DemoScreen extends AbstractScreen {
     private ShapeRenderer debugRenderer = new ShapeRenderer();
 
     public DemoScreen(final AbstractGame game) {
         super(game);
-        Button backButton = findButton("backButton");
+        addBackButtonListener(game);
+
+    }
+
+	private void addBackButtonListener(final AbstractGame game) {
+		Button backButton = findButton("backButton");
         if (backButton != null) {
             backButton.addListener(new ClickListener() {
                 @Override
@@ -24,8 +29,7 @@ public class DemoScreen extends AbstractScreen {
                 }
             });
         }
-
-    }
+	}
 
     @Override
     public void unloadAssets() {
@@ -50,4 +54,9 @@ public class DemoScreen extends AbstractScreen {
         Table.drawDebug(stage);
 
     }
+
+	@Override
+	public void onStageReloaded() {
+		addBackButtonListener(game);
+	}
 }

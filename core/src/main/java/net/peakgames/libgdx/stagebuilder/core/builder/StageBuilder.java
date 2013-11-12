@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.sun.org.apache.bcel.internal.generic.LADD;
 import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
 import net.peakgames.libgdx.stagebuilder.core.assets.ResolutionHelper;
 import net.peakgames.libgdx.stagebuilder.core.model.*;
@@ -109,13 +108,4 @@ public class StageBuilder {
         String path = DEFAULT_LAYOUT_FOLDER + "/" + fileName;
         return Gdx.files.internal(path);
     }
-
-    private boolean doesFileExist(String path) {
-        try {
-            return Gdx.files.internal(path).exists();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
 }

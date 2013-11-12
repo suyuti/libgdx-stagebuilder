@@ -1,26 +1,29 @@
 package net.peakgames.libgdx.stagebuilder.core;
 
+import java.util.Map;
+
+import net.peakgames.libgdx.stagebuilder.core.builder.StageBuilder;
+import net.peakgames.libgdx.stagebuilder.core.util.Utils;
+
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import net.peakgames.libgdx.stagebuilder.core.builder.StageBuilder;
-import net.peakgames.libgdx.stagebuilder.core.demo.DemoLocalizationService;
-
-import java.util.Map;
 
 public abstract class AbstractScreen implements Screen {
 
+	public static final long SCREEN_REFRESH_CHECK_PERIOD_MS = 1000;
     private static final boolean keepAspectRatio = true;
     public final String TAG = getClass().getSimpleName();
     protected Graphics graphics;
@@ -29,10 +32,14 @@ public abstract class AbstractScreen implements Screen {
     protected AbstractGame game;
     protected OrthographicCamera camera;
     private AssetManager assetManager;
+    private long lastScreenRefreshCheckTimestamp = System.currentTimeMillis();
+    private String layoutFileChecksum;
+    
     /**
      * parameters map that is used to pass configuration data for screen.
      */
     protected Map<String, String> parameters;
+	private StageBuilder stageBuilder;
 
     public AbstractScreen(AbstractGame game) {
         if (game == null) {
@@ -50,12 +57,13 @@ public abstract class AbstractScreen implements Screen {
     private void createStage(AbstractGame game) {
         float width = game.getWidth();
         float height = game.getHeight();
-        StageBuilder stageBuilder = new StageBuilder(game.getAssetsInterface(), game.getResolutionHelper(), new DemoLocalizationService());
+        camera = new OrthographicCamera();
+        
+        stageBuilder = new StageBuilder(game.getAssetsInterface(), game.getResolutionHelper(), game.getLocalizationService());
         stage = stageBuilder.build(getFileName(), width, height, keepAspectRatio);
 
         Gdx.input.setInputProcessor(this.stage);
 
-        camera = new OrthographicCamera();
 
         stage.setCamera(camera);
         this.stage.setViewport(width, height, keepAspectRatio);
@@ -70,6 +78,10 @@ public abstract class AbstractScreen implements Screen {
     }
 
     public abstract void unloadAssets();
+    /**
+     * Stage is replaced with a new one, listeners should be updated.
+     */
+    public abstract void onStageReloaded();
 
     @Override
     public void render(float delta) {
@@ -80,13 +92,31 @@ public abstract class AbstractScreen implements Screen {
         this.stage.draw();
 
         this.assetManager.update();
+        
+        refreshScreenIfNecessary();
     }
 
-    @Override
+    private void refreshScreenIfNecessary() {
+    	if (Gdx.app.getType() == ApplicationType.Desktop) {
+    		long now = System.currentTimeMillis();
+    		if (now - lastScreenRefreshCheckTimestamp > SCREEN_REFRESH_CHECK_PERIOD_MS) {
+    			//check file modified date
+    			String currentChecksum = calculateLayoutFileChecksum();
+    			if ( ! currentChecksum.equals(this.layoutFileChecksum)) {
+    				//file changed, refresh screen...
+    				Gdx.app.log(TAG, "Layout file updated. Reloading stage...");
+    				reloadStage();
+    				this.layoutFileChecksum = currentChecksum;
+    			}
+    			lastScreenRefreshCheckTimestamp = now;
+    		}
+    	}		
+	}
+
+	@Override
     public void resize(int newWidth, int newHeight) {
         Gdx.app.log(TAG, "resize " + newWidth + " x " + newHeight);
-        createStage(this.game);
-        //TODO orientation degisimini burada yakaliyoruz. stage yeniden build edildigi icin listener'lari yeniden vermek lazim.
+        reloadStage();
     }
 
     @Override
@@ -95,6 +125,7 @@ public abstract class AbstractScreen implements Screen {
         Gdx.app.log(TAG, "show");
         stage.getRoot().getColor().a = 0;
         stage.addAction(Actions.fadeIn(0.3f));
+        layoutFileChecksum = calculateLayoutFileChecksum();
     }
 
     @Override
@@ -136,5 +167,16 @@ public abstract class AbstractScreen implements Screen {
 
     public TextButton findTextButton(String name) {
         return (TextButton) stage.getRoot().findActor(name);
+    }
+    
+    private String calculateLayoutFileChecksum() {
+		FileHandle fileHandle = stageBuilder.getLayoutFile(getFileName());
+		return Utils.calculateMD5(fileHandle.read());		
+    }
+    
+    private void reloadStage() {
+    	createStage(game);
+    	onStageReloaded();
+    	
     }
 }

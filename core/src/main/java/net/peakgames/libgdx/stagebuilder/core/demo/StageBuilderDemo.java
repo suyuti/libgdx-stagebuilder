@@ -3,6 +3,7 @@ package net.peakgames.libgdx.stagebuilder.core.demo;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector2;
 import net.peakgames.libgdx.stagebuilder.core.AbstractGame;
+import net.peakgames.libgdx.stagebuilder.core.services.LocalizationService;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,4 +22,9 @@ public class StageBuilderDemo extends AbstractGame {
         Screen demoScreen = new SplashScreen(this);
         setScreen(demoScreen);
     }
+
+	@Override
+	public LocalizationService getLocalizationService() {
+		return new DemoLocalizationService();
+	}
 }

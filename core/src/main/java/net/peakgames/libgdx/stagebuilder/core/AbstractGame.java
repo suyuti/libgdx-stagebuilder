@@ -8,6 +8,7 @@ import net.peakgames.libgdx.stagebuilder.core.assets.Assets;
 import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
 import net.peakgames.libgdx.stagebuilder.core.assets.ResolutionHelper;
 import net.peakgames.libgdx.stagebuilder.core.assets.ScreenResolutionFileHandleResolver;
+import net.peakgames.libgdx.stagebuilder.core.services.LocalizationService;
 
 import java.util.EmptyStackException;
 import java.util.List;
@@ -30,6 +31,7 @@ public abstract class AbstractGame implements ApplicationListener {
     private ScreenResolutionFileHandleResolver fileHandleResolver;
 
     public abstract List<Vector2> getSupportedResolutions();
+    public abstract LocalizationService getLocalizationService();
 
     public void initialize(int width, int height) {
         this.width = width;
@@ -205,6 +207,10 @@ public abstract class AbstractGame implements ApplicationListener {
         @Override
         public void unloadAssets() {
         }
+
+		@Override
+		public void onStageReloaded() {
+		}
     }
 }
 
