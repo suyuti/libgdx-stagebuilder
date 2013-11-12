@@ -14,6 +14,11 @@ public class MenuScreen extends DemoScreen {
         addButtonListeners();
     }
 
+    @Override
+    public void onStageReloaded() {
+        addButtonListeners();
+    }
+
     private void addButtonListeners() {
         findButton("button_screen").addListener(new ClickListener() {
             @Override
