@@ -10,7 +10,7 @@
 
 	<artifactId>stagebuilder-android</artifactId>
 	<packaging>apk</packaging>
-	<name>StageBuilderTest Android</name>
+	<name>StageBuilder Android</name>
 
 	<properties>
 		<keystore.path>game.keystore</keystore.path>

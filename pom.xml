@@ -6,7 +6,7 @@
 	<artifactId>stagebuilder</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>StageBuilderTest Parent</name>
+	<name>StageBuilder Parent</name>
 
 	<properties>
 		<gdx.version>0.9.9</gdx.version>

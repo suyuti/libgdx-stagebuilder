@@ -10,7 +10,7 @@
 
 	<artifactId>stagebuilder-core</artifactId>
 	<packaging>jar</packaging>
-	<name>StageBuilderTest Core</name>
+	<name>StageBuilder Core</name>
 
 	<dependencies>
 		<dependency>
