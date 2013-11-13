@@ -32,7 +32,7 @@ public class TextButtonBuilder extends ButtonBuilder {
             style.fontColor = Color.valueOf(textButtonModel.getFontColor());
         }
 
-        TextButton textButton = new TextButton(textButtonModel.getText(), style);
+        TextButton textButton = new TextButton(getLocalizedString(textButtonModel.getText()), style);
         normalizeModelSize(textButtonModel, up.getMinWidth(), up.getMinHeight());
         setBasicProperties(textButtonModel, textButton);
 

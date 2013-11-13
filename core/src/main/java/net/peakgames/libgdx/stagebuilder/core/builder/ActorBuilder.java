@@ -1,16 +1,17 @@
 package net.peakgames.libgdx.stagebuilder.core.builder;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import java.util.Comparator;
+
 import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
 import net.peakgames.libgdx.stagebuilder.core.assets.ResolutionHelper;
 import net.peakgames.libgdx.stagebuilder.core.model.BaseModel;
 import net.peakgames.libgdx.stagebuilder.core.services.LocalizationService;
 import net.peakgames.libgdx.stagebuilder.core.xml.XmlModelBuilder;
 
-import java.util.Comparator;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 public abstract class ActorBuilder {
 
@@ -157,6 +158,7 @@ public abstract class ActorBuilder {
 
     public String getLocalizedString(String s) {
         if (s.startsWith(XmlModelBuilder.LOCALIZED_STRING_PREFIX)) {
+        	s = s.replace(XmlModelBuilder.LOCALIZED_STRING_PREFIX, "");
             return localizationService.getString(s);
         } else {
             return s;
