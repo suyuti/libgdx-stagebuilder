@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public abstract class AbstractScreen implements Screen {
@@ -154,11 +155,15 @@ public abstract class AbstractScreen implements Screen {
     }
 
     public Image findImage(String name) {
-        return (Image) stage.getRoot().findActor(name);
+        return (Image)findActor(name);
     }
 
     public Button findButton(String name) {
-        return (Button) stage.getRoot().findActor(name);
+        return (Button)findActor(name);
+    }
+    
+    public Label findLabel(String name) {
+        return (Label)findActor(name);
     }
 
     public Actor findActor(String name) {

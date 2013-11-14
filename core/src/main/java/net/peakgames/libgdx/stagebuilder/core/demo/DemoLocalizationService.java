@@ -7,4 +7,9 @@ public class DemoLocalizationService implements LocalizationService {
     public String getString(String s) {
         return s;
     }
+
+	@Override
+	public String getString(String s, Object... args) {
+		return s;
+	}
 }

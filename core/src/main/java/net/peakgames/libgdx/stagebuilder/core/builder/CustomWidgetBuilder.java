@@ -7,9 +7,11 @@ import net.peakgames.libgdx.stagebuilder.core.assets.ResolutionHelper;
 import net.peakgames.libgdx.stagebuilder.core.model.BaseModel;
 import net.peakgames.libgdx.stagebuilder.core.model.CustomWidgetModel;
 import net.peakgames.libgdx.stagebuilder.core.services.LocalizationService;
+import net.peakgames.libgdx.stagebuilder.core.xml.XmlModelBuilder;
 
 import java.lang.reflect.Method;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class CustomWidgetBuilder extends ActorBuilder {
 
@@ -21,6 +23,7 @@ public class CustomWidgetBuilder extends ActorBuilder {
     public Actor build(BaseModel model) {
         try {
             CustomWidgetModel customWidgetModel = (CustomWidgetModel) model;
+            localizeAttributes(customWidgetModel);
             Class<?> klass = Class.forName(customWidgetModel.getKlass());
             Object customWidget = klass.newInstance();
             Class<?>[] buildMethodParameterTypes = {
@@ -46,6 +49,11 @@ public class CustomWidgetBuilder extends ActorBuilder {
         }
 
     }
-
+    
+    private void localizeAttributes(CustomWidgetModel customWidgetModel) {
+    	for (Entry<String,String> mapEntry : customWidgetModel.getAttributeMap().entrySet()) {
+    		customWidgetModel.addAttribute(mapEntry.getKey(), getLocalizedString(mapEntry.getValue()));
+    	}
+    }
 
 }
