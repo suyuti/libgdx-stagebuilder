@@ -11,6 +11,7 @@ public class TextButtonModel extends ButtonModel {
     private float labelPaddingRight;
     private float labelPaddingTop;
     private float labelPaddingBottom;
+    private String alignment;
 
     public String getText() {
         return text;
@@ -83,4 +84,12 @@ public class TextButtonModel extends ButtonModel {
     public void setLabelPaddingBottom(float labelPaddingBottom) {
         this.labelPaddingBottom = labelPaddingBottom;
     }
+
+	public String getAlignment() {
+		return alignment;
+	}
+
+	public void setAlignment(String alignment) {
+		this.alignment = alignment;
+	}
 }

@@ -43,6 +43,10 @@ public class TextButtonBuilder extends ButtonBuilder {
         textButton.padLeft(textButtonModel.getLabelPaddingLeft() * positionMultiplier);
 
         Label label = textButton.getLabel();
+        if(textButtonModel.getAlignment() != null) {
+        	int alignment = calculateAlignment(textButtonModel.getAlignment());
+        	label.setAlignment(alignment);
+        }
         Cell labelCell = textButton.getLabelCell();
         if (textButtonModel.getFontScale() != 1) {
             labelCell.height(textButton.getHeight());

@@ -19,6 +19,7 @@ public abstract class ActorBuilder {
     protected AssetsInterface assets;
     protected ResolutionHelper resolutionHelper;
     protected LocalizationService localizationService;
+    public static final int NO_ALIGN = 0;
 
 
     public ActorBuilder(AssetsInterface assets, ResolutionHelper resolutionHelper, LocalizationService localizationService) {
@@ -30,7 +31,7 @@ public abstract class ActorBuilder {
     public static int calculateAlignment(String s) {
         try {
             String[] sArray = s.split("\\|");
-            int result = 0;
+            int result = NO_ALIGN;
             for (String val : sArray) {
                 if ("left".equals(val)) {
                     result |= Align.left;
@@ -65,7 +66,7 @@ public abstract class ActorBuilder {
                 model.getY() * resolutionHelper.getPositionMultiplier(),
                 model.getWidth(),
                 model.getHeight());
-
+        
         if (model.getScale() != 1) {
             actor.setScale(model.getScale(), model.getScale());
         } else {

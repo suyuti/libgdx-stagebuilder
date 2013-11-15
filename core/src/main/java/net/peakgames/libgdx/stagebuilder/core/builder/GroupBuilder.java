@@ -24,6 +24,7 @@ public class GroupBuilder extends ActorBuilder {
     public Actor build(BaseModel model) {
         GroupModel groupModel = (GroupModel) model;
         Group group = new Group();
+        normalizeModelSize(model, model.getWidth(), model.getHeight());
         setBasicProperties(model, group);
         List<BaseModel> children = groupModel.getChildren();
         Collections.sort(children, new ZIndexComparator());
