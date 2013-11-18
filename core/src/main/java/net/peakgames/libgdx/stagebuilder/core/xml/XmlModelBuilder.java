@@ -13,6 +13,7 @@ public class XmlModelBuilder {
     public static final String BUTTON_TAG = "Button";
     public static final String TEXT_BUTTON_TAG = "TextButton";
     public static final String LABEL_TAG = "Label";
+    public static final String SELECT_BOX_TAG = "SelectBox";
     public static final String GROUP_TAG = "Group";
     public static final String LOCALIZED_STRING_PREFIX = "@string/";
 
@@ -58,6 +59,8 @@ public class XmlModelBuilder {
             model = buildTextButtonModel(xmlParser);
         } else if (LABEL_TAG.equalsIgnoreCase(tagName)) {
             model = buildLabelModel(xmlParser);
+        } else if (SELECT_BOX_TAG.equalsIgnoreCase(tagName)) {
+            model = buildSelectBoxModel(xmlParser);
         } else if (GROUP_TAG.equalsIgnoreCase(tagName)) {
             model = buildGroupModel(xmlParser);
         } else if (isCustomWidget(tagName)) {
@@ -115,6 +118,23 @@ public class XmlModelBuilder {
     private BaseModel buildLabelModel(XmlPullParser xmlParser) {
         LabelModel label = new LabelModel();
         setBaseModelParameters(label, xmlParser);
+        label.setText(XmlHelper.readStringAttribute(xmlParser, "text"));
+        label.setFontName(XmlHelper.readStringAttribute(xmlParser, "fontName"));
+        label.setFontColor(XmlHelper.readStringAttribute(xmlParser, "fontColor"));
+        label.setWrap(XmlHelper.readBooleanAttribute(xmlParser, "wrap", false));
+        label.setAlignment(XmlHelper.readStringAttribute(xmlParser, "align"));
+        label.setShadow(XmlHelper.readBooleanAttribute(xmlParser, "shadow", false));
+        label.setShadowColor(XmlHelper.readStringAttribute(xmlParser, "shadowColor"));
+        label.setFontScale(XmlHelper.readFloatAttribute(xmlParser, "fontScale", 1f));
+        return label;
+    }
+
+    private BaseModel buildSelectBoxModel(XmlPullParser xmlParser) {
+        SelectBoxModel selectBoxModel = new SelectBoxModel();
+        setBaseModelParameters(selectBoxModel, xmlParser);
+        selectBoxModel.setVa
+
+
         label.setText(XmlHelper.readStringAttribute(xmlParser, "text"));
         label.setFontName(XmlHelper.readStringAttribute(xmlParser, "fontName"));
         label.setFontColor(XmlHelper.readStringAttribute(xmlParser, "fontColor"));
