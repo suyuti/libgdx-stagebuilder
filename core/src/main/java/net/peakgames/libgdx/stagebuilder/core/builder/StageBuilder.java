@@ -58,11 +58,20 @@ public class StageBuilder {
         List<BaseModel> modelList = xmlModelBuilder.buildModels(getLayoutFile(fileName));
         GroupModel groupModel = (GroupModel) modelList.get(0);
         Group group = new Group();
+        updateGroupSizeAndPosition(group, groupModel);
         for (BaseModel model : groupModel.getChildren()) {
             ActorBuilder builder = builders.get(model.getClass());
             group.addActor(builder.build(model));
         }
         return group;
+    }
+    
+    private void updateGroupSizeAndPosition(Group group, GroupModel referenceModel) {
+    	float multiplier = resolutionHelper.getPositionMultiplier();
+    	group.setX(referenceModel.getX() * multiplier);
+    	group.setY(referenceModel.getY() * multiplier);
+    	group.setWidth(referenceModel.getWidth() * multiplier);
+    	group.setHeight(referenceModel.getHeight() * multiplier);
     }
 
     public Stage build(String fileName, float width, float height, boolean keepAspectRatio) {
