@@ -173,7 +173,11 @@ public abstract class AbstractScreen implements Screen {
     public TextButton findTextButton(String name) {
         return (TextButton) stage.getRoot().findActor(name);
     }
-    
+
+    public StageBuilder getStageBuilder() {
+        return stageBuilder;
+    }
+
     private String calculateLayoutFileChecksum() {
 		FileHandle fileHandle = stageBuilder.getLayoutFile(getFileName());
 		return Utils.calculateMD5(fileHandle.read());		

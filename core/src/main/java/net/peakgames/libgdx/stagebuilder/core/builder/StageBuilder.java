@@ -117,4 +117,16 @@ public class StageBuilder {
         String path = DEFAULT_LAYOUT_FOLDER + "/" + fileName;
         return Gdx.files.internal(path);
     }
+
+    public AssetsInterface getAssets() {
+        return assets;
+    }
+
+    public ResolutionHelper getResolutionHelper() {
+        return resolutionHelper;
+    }
+
+    public LocalizationService getLocalizationService() {
+        return localizationService;
+    }
 }
