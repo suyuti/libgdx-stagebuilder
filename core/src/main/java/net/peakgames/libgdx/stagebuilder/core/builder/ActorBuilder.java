@@ -21,6 +21,8 @@ public abstract class ActorBuilder {
     protected LocalizationService localizationService;
     public static final int NO_ALIGN = 0;
 
+    protected static final String ESCAPE_NEW_LINE = "\n";
+
 
     public ActorBuilder(AssetsInterface assets, ResolutionHelper resolutionHelper, LocalizationService localizationService) {
         this.localizationService = localizationService;
@@ -158,6 +160,9 @@ public abstract class ActorBuilder {
     }
 
     public String getLocalizedString(String s) {
+        if (s == null) {
+            return "";
+        }
         if (s.startsWith(XmlModelBuilder.LOCALIZED_STRING_PREFIX)) {
         	s = s.replace(XmlModelBuilder.LOCALIZED_STRING_PREFIX, "");
             return localizationService.getString(s);
