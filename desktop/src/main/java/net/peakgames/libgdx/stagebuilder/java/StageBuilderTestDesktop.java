@@ -6,8 +6,8 @@ import net.peakgames.libgdx.stagebuilder.core.demo.StageBuilderDemo;
 
 public class StageBuilderTestDesktop {
     public static void main(String[] args) {
-        int width = 800;
-        int height = 480;
+        int width = 1280;
+        int height = 800;
 
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.useGL20 = true;
