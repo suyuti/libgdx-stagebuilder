@@ -22,7 +22,7 @@ public class LabelBuilder extends ActorBuilder {
         LabelModel labelModel = (LabelModel) model;
         Color color = labelModel.getFontColor() == null ? DEFAULT_LABEL_COLOR : Color.valueOf(labelModel.getFontColor());
         Label.LabelStyle style = new Label.LabelStyle(assets.getFont(labelModel.getFontName()), color);
-        Label label = new Label(getLocalizedString(labelModel.getText()).replace(ESCAPE_NEW_LINE, String.format("%n")), style);
+        Label label = new Label(getLocalizedString(labelModel.getText()).replace("\\n", String.format("%n")), style);
 
         normalizeModelSize(labelModel, 0, 0);
         setBasicProperties(model, label);
