@@ -24,11 +24,16 @@ public class ExternalGroupModelBuilder extends ActorBuilder {
         ExternalGroupModel externalGroupModel = (ExternalGroupModel) model;
         try {
             Group group = stageBuilder.buildGroup(externalGroupModel.getFileName());
-            setBasicProperties(model, group);
+            updateGroupProperties( externalGroupModel, group);
             return group;
         } catch (Exception e) {
             Gdx.app.log(TAG, "Failed to build group from external file " + externalGroupModel.getFileName());
             return null;
         }
+    }
+
+    private void updateGroupProperties( ExternalGroupModel model, Group group){
+        group.setName( model.getName());
+        group.setPosition( model.getX() * resolutionHelper.getPositionMultiplier(), model.getY() * resolutionHelper.getPositionMultiplier());
     }
 }
