@@ -12,6 +12,7 @@ public class TextButtonModel extends ButtonModel {
     private float labelPaddingTop;
     private float labelPaddingBottom;
     private String alignment;
+    private boolean wrap;
 
     public String getText() {
         return text;
@@ -92,4 +93,12 @@ public class TextButtonModel extends ButtonModel {
 	public void setAlignment(String alignment) {
 		this.alignment = alignment;
 	}
+
+    public boolean isWrap() {
+        return wrap;
+    }
+
+    public void setWrap(boolean wrap) {
+        this.wrap = wrap;
+    }
 }
