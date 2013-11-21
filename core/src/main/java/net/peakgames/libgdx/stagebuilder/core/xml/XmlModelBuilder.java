@@ -132,18 +132,19 @@ public class XmlModelBuilder {
     private BaseModel buildSelectBoxModel(XmlPullParser xmlParser) {
         SelectBoxModel selectBoxModel = new SelectBoxModel();
         setBaseModelParameters(selectBoxModel, xmlParser);
-        selectBoxModel.setVa
-
-
-        label.setText(XmlHelper.readStringAttribute(xmlParser, "text"));
-        label.setFontName(XmlHelper.readStringAttribute(xmlParser, "fontName"));
-        label.setFontColor(XmlHelper.readStringAttribute(xmlParser, "fontColor"));
-        label.setWrap(XmlHelper.readBooleanAttribute(xmlParser, "wrap", false));
-        label.setAlignment(XmlHelper.readStringAttribute(xmlParser, "align"));
-        label.setShadow(XmlHelper.readBooleanAttribute(xmlParser, "shadow", false));
-        label.setShadowColor(XmlHelper.readStringAttribute(xmlParser, "shadowColor"));
-        label.setFontScale(XmlHelper.readFloatAttribute(xmlParser, "fontScale", 1f));
-        return label;
+        selectBoxModel.setName(XmlHelper.readStringAttribute(xmlParser, "name"));
+        selectBoxModel.setValue(XmlHelper.readStringAttribute(xmlParser, "value"));
+        selectBoxModel.setFontName(XmlHelper.readStringAttribute(xmlParser, "font"));
+        selectBoxModel.setFontColor(XmlHelper.readStringAttribute(xmlParser, "fontColor"));
+        selectBoxModel.setFontColorSelected(XmlHelper.readStringAttribute(xmlParser, "fontColorSelected"));
+        selectBoxModel.setFontColorUnselected(XmlHelper.readStringAttribute(xmlParser, "fontColorUnselected"));
+        selectBoxModel.setAtlasName(XmlHelper.readStringAttribute(xmlParser, "atlas"));
+        selectBoxModel.setBackground(XmlHelper.readStringAttribute(xmlParser, "background"));
+        selectBoxModel.setSelection(XmlHelper.readStringAttribute(xmlParser, "selection"));
+        selectBoxModel.setSelectionBackground(XmlHelper.readStringAttribute(xmlParser, "selectionBackground"));
+        selectBoxModel.setPaddingLeft(XmlHelper.readIntAttribute(xmlParser, "paddingLeft", 1));
+        selectBoxModel.setPaddingRight(XmlHelper.readIntAttribute(xmlParser, "paddingRight", 1));
+        return selectBoxModel;
     }
 
     private BaseModel buildButtonModel(XmlPullParser xmlParser) {
