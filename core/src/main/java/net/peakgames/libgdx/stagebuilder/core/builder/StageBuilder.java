@@ -2,6 +2,8 @@ package net.peakgames.libgdx.stagebuilder.core.builder;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
@@ -49,6 +51,7 @@ public class StageBuilder {
         builders.put(ButtonModel.class, new ButtonBuilder(this.assets, this.resolutionHelper, this.localizationService));
         builders.put(TextButtonModel.class, new TextButtonBuilder(this.assets, this.resolutionHelper, this.localizationService));
         builders.put(LabelModel.class, new LabelBuilder(this.assets, this.resolutionHelper, this.localizationService));
+        builders.put(SelectBoxModel.class, new SelectBoxBuilder(this.assets, this.resolutionHelper, this.localizationService));
         builders.put(CustomWidgetModel.class, new CustomWidgetBuilder(this.assets, this.resolutionHelper, this.localizationService));
         builders.put(ExternalGroupModel.class, new ExternalGroupModelBuilder(this.assets, this.resolutionHelper, this.localizationService, this));
     }
@@ -58,6 +61,8 @@ public class StageBuilder {
         List<BaseModel> modelList = xmlModelBuilder.buildModels(getLayoutFile(fileName));
         GroupModel groupModel = (GroupModel) modelList.get(0);
         Group group = new Group();
+        GroupBuilder groupBuilder = (GroupBuilder) builders.get(GroupModel.class);
+        groupBuilder.setBasicProperties(groupModel, group);
         updateGroupSizeAndPosition(group, groupModel);
         for (BaseModel model : groupModel.getChildren()) {
             ActorBuilder builder = builders.get(model.getClass());
@@ -65,13 +70,13 @@ public class StageBuilder {
         }
         return group;
     }
-    
+
     private void updateGroupSizeAndPosition(Group group, GroupModel referenceModel) {
-    	float multiplier = resolutionHelper.getPositionMultiplier();
-    	group.setX(referenceModel.getX() * multiplier);
-    	group.setY(referenceModel.getY() * multiplier);
-    	group.setWidth(referenceModel.getWidth() * multiplier);
-    	group.setHeight(referenceModel.getHeight() * multiplier);
+        float multiplier = resolutionHelper.getPositionMultiplier();
+        group.setX(referenceModel.getX() * multiplier);
+        group.setY(referenceModel.getY() * multiplier);
+        group.setWidth(referenceModel.getWidth() * multiplier);
+        group.setHeight(referenceModel.getHeight() * multiplier);
     }
 
     public Stage build(String fileName, float width, float height, boolean keepAspectRatio) {
