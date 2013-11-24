@@ -10,5 +10,14 @@
 
     <!-- This custom widget is used as an indicator for async asset loading. Before loading assets visibility is set to true,
          after loading assets visibility is set back to false -->
-    <net.peakgames.libgdx.stagebuilder.core.demo.widgets.LoadingWidget name="loading_widget" visible="false"/>
+    <net.peakgames.libgdx.stagebuilder.core.widgets.LoadingWidget 
+        name="loading_widget"
+        fullScreen="true"
+        alpha="0.5"
+        text="loading"
+        fontName="default_font.fnt"
+        backgroundFrame="loading_circle_background"
+        foregroundFrame="loading_circle_foreground"
+        atlasName="common.atlas"
+    />
 </group>
