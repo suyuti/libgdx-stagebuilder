@@ -27,7 +27,7 @@ public class StageBuilderTestActivity extends AndroidApplication {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         StageBuilderDemo demo = new StageBuilderDemo();
-        demo.initialize(metrics.widthPixels, metrics.heightPixels, supportedScreenResolutions);
+        demo.initialize(metrics.widthPixels, metrics.heightPixels);
 
         initialize(demo, config);
     }

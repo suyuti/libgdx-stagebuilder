@@ -13,6 +13,7 @@ public class XmlModelBuilder {
     public static final String BUTTON_TAG = "Button";
     public static final String TEXT_BUTTON_TAG = "TextButton";
     public static final String LABEL_TAG = "Label";
+    public static final String SELECT_BOX_TAG = "SelectBox";
     public static final String GROUP_TAG = "Group";
     public static final String LOCALIZED_STRING_PREFIX = "@string/";
 
@@ -58,6 +59,8 @@ public class XmlModelBuilder {
             model = buildTextButtonModel(xmlParser);
         } else if (LABEL_TAG.equalsIgnoreCase(tagName)) {
             model = buildLabelModel(xmlParser);
+        } else if (SELECT_BOX_TAG.equalsIgnoreCase(tagName)) {
+            model = buildSelectBoxModel(xmlParser);
         } else if (GROUP_TAG.equalsIgnoreCase(tagName)) {
             model = buildGroupModel(xmlParser);
         } else if (isCustomWidget(tagName)) {
@@ -126,6 +129,24 @@ public class XmlModelBuilder {
         return label;
     }
 
+    private BaseModel buildSelectBoxModel(XmlPullParser xmlParser) {
+        SelectBoxModel selectBoxModel = new SelectBoxModel();
+        setBaseModelParameters(selectBoxModel, xmlParser);
+        selectBoxModel.setName(XmlHelper.readStringAttribute(xmlParser, "name"));
+        selectBoxModel.setValue(XmlHelper.readStringAttribute(xmlParser, "value"));
+        selectBoxModel.setFontName(XmlHelper.readStringAttribute(xmlParser, "font"));
+        selectBoxModel.setFontColor(XmlHelper.readStringAttribute(xmlParser, "fontColor"));
+        selectBoxModel.setFontColorSelected(XmlHelper.readStringAttribute(xmlParser, "fontColorSelected"));
+        selectBoxModel.setFontColorUnselected(XmlHelper.readStringAttribute(xmlParser, "fontColorUnselected"));
+        selectBoxModel.setAtlasName(XmlHelper.readStringAttribute(xmlParser, "atlas"));
+        selectBoxModel.setBackground(XmlHelper.readStringAttribute(xmlParser, "background"));
+        selectBoxModel.setSelection(XmlHelper.readStringAttribute(xmlParser, "selection"));
+        selectBoxModel.setSelectionBackground(XmlHelper.readStringAttribute(xmlParser, "selectionBackground"));
+        selectBoxModel.setPaddingLeft(XmlHelper.readIntAttribute(xmlParser, "paddingLeft", 1));
+        selectBoxModel.setPaddingRight(XmlHelper.readIntAttribute(xmlParser, "paddingRight", 1));
+        return selectBoxModel;
+    }
+
     private BaseModel buildButtonModel(XmlPullParser xmlParser) {
         ButtonModel button = new ButtonModel();
         setBaseModelParameters(button, xmlParser);
@@ -156,6 +177,8 @@ public class XmlModelBuilder {
         textButton.setLabelPaddingRight(XmlHelper.readFloatAttribute(xmlParser, "labelPaddingRight", 0.0f));
         textButton.setLabelPaddingTop(XmlHelper.readFloatAttribute(xmlParser, "labelPaddingTop", 0.0f));
         textButton.setLabelPaddingBottom(XmlHelper.readFloatAttribute(xmlParser, "labelPaddingBottom", 0.0f));
+        textButton.setAlignment(XmlHelper.readStringAttribute(xmlParser, "align"));
+        textButton.setWrap(XmlHelper.readBooleanAttribute(xmlParser, "align", false));
         return textButton;
     }
 

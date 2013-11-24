@@ -11,7 +11,7 @@
 
 	<artifactId>stagebuilder-ios</artifactId>
 	<packaging>dll</packaging>
-	<name>StageBuilderTest iOS</name>
+	<name>StageBuilder iOS</name>
 
 	<dependencies>
 		<dependency>

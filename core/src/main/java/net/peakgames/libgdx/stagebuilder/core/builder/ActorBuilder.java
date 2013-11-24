@@ -1,16 +1,17 @@
 package net.peakgames.libgdx.stagebuilder.core.builder;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import java.util.Comparator;
+
 import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
 import net.peakgames.libgdx.stagebuilder.core.assets.ResolutionHelper;
 import net.peakgames.libgdx.stagebuilder.core.model.BaseModel;
 import net.peakgames.libgdx.stagebuilder.core.services.LocalizationService;
 import net.peakgames.libgdx.stagebuilder.core.xml.XmlModelBuilder;
 
-import java.util.Comparator;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 public abstract class ActorBuilder {
 
@@ -18,7 +19,7 @@ public abstract class ActorBuilder {
     protected AssetsInterface assets;
     protected ResolutionHelper resolutionHelper;
     protected LocalizationService localizationService;
-
+    public static final int NO_ALIGN = 0;
 
     public ActorBuilder(AssetsInterface assets, ResolutionHelper resolutionHelper, LocalizationService localizationService) {
         this.localizationService = localizationService;
@@ -29,7 +30,7 @@ public abstract class ActorBuilder {
     public static int calculateAlignment(String s) {
         try {
             String[] sArray = s.split("\\|");
-            int result = 0;
+            int result = NO_ALIGN;
             for (String val : sArray) {
                 if ("left".equals(val)) {
                     result |= Align.left;
@@ -64,7 +65,7 @@ public abstract class ActorBuilder {
                 model.getY() * resolutionHelper.getPositionMultiplier(),
                 model.getWidth(),
                 model.getHeight());
-
+        
         if (model.getScale() != 1) {
             actor.setScale(model.getScale(), model.getScale());
         } else {
@@ -156,7 +157,11 @@ public abstract class ActorBuilder {
     }
 
     public String getLocalizedString(String s) {
+        if (s == null) {
+            return "";
+        }
         if (s.startsWith(XmlModelBuilder.LOCALIZED_STRING_PREFIX)) {
+        	s = s.replace(XmlModelBuilder.LOCALIZED_STRING_PREFIX, "");
             return localizationService.getString(s);
         } else {
             return s;

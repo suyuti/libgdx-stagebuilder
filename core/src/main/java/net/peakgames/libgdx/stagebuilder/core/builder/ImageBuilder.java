@@ -56,13 +56,13 @@ public class ImageBuilder extends ActorBuilder {
     }
 
     private Image createFromTexture(ImageModel imageModel) {
-        TextureRegion textureRegion = new TextureRegion(assets.getTexture(imageModel.getTextureSrc()));
+        TextureRegion textureRegion = new TextureRegion(assets.getTexture(getLocalizedString(imageModel.getTextureSrc())));
         return new Image(textureRegion);
     }
 
     private Image createFromTextureAtlas(ImageModel imageModel) {
         TextureAtlas textureAtlas = assets.getTextureAtlas(imageModel.getAtlasName());
-        TextureAtlas.AtlasRegion atlasRegion = textureAtlas.findRegion(imageModel.getFrame());
+        TextureAtlas.AtlasRegion atlasRegion = textureAtlas.findRegion(getLocalizedString(imageModel.getFrame()));
         return new Image(atlasRegion);
     }
 

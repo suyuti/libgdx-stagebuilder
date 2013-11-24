@@ -12,7 +12,15 @@ public class ExternalGroupScreen extends DemoScreen {
 
     public ExternalGroupScreen(AbstractGame game) {
         super(game);
-        final TextButton button = findTextButton("showPopupButton");
+        setPopupButtonListener();
+    }
+    
+    public void onStageReloaded() {	
+    	setPopupButtonListener();
+    }
+
+	private void setPopupButtonListener() {
+		final TextButton button = findTextButton("showPopupButton");
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -27,6 +35,6 @@ public class ExternalGroupScreen extends DemoScreen {
                 }
             }
         });
-    }
+	}
 
 }

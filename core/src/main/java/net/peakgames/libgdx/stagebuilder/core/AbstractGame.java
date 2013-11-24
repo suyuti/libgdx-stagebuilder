@@ -8,9 +8,11 @@ import net.peakgames.libgdx.stagebuilder.core.assets.Assets;
 import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
 import net.peakgames.libgdx.stagebuilder.core.assets.ResolutionHelper;
 import net.peakgames.libgdx.stagebuilder.core.assets.ScreenResolutionFileHandleResolver;
+import net.peakgames.libgdx.stagebuilder.core.services.LocalizationService;
 
 import java.util.EmptyStackException;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 public abstract class AbstractGame implements ApplicationListener {
@@ -28,10 +30,13 @@ public abstract class AbstractGame implements ApplicationListener {
     private AssetsInterface assetsInterface;
     private ScreenResolutionFileHandleResolver fileHandleResolver;
 
-    public void initialize(int width, int height, List<Vector2> supportedResolutions) {
+    public abstract List<Vector2> getSupportedResolutions();
+    public abstract LocalizationService getLocalizationService();
+
+    public void initialize(int width, int height) {
         this.width = width;
         this.height = height;
-        this.supportedResolutions = supportedResolutions;
+        this.supportedResolutions = getSupportedResolutions();
         fileHandleResolver = new ScreenResolutionFileHandleResolver(this.width, supportedResolutions);
         this.resolutionHelper = new ResolutionHelper(TARGET_WIDTH, TARGET_HEIGHT, width, height, fileHandleResolver.findBestResolution().x);
         this.assetsInterface = new Assets(fileHandleResolver, resolutionHelper);
@@ -149,6 +154,11 @@ public abstract class AbstractGame implements ApplicationListener {
         displayTopScreen();
     }
 
+    public void setScreen(Screen screen, Map<String, String> parameters) {
+        ((AbstractScreen) screen).setParameters(parameters);
+        setScreen(screen);
+    }
+
     public Stack<Screen> getScreens() {
         return this.screens;
     }
@@ -197,6 +207,10 @@ public abstract class AbstractGame implements ApplicationListener {
         @Override
         public void unloadAssets() {
         }
+
+		@Override
+		public void onStageReloaded() {
+		}
     }
 }
 

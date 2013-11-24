@@ -10,7 +10,7 @@
 
 	<artifactId>stagebuilder-html</artifactId>
 	<packaging>war</packaging>
-	<name>StageBuilderTest HTML</name>
+	<name>StageBuilder HTML</name>
 
 	<properties>
 		<gwt.module>net.peakgames.libgdx.stagebuilder.StageBuilderTest</gwt.module>
