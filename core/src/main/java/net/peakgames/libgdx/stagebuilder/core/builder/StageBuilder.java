@@ -108,19 +108,35 @@ public class StageBuilder {
         if (isLandscape) {
             String path = LANDSCAPE_LAYOUT_FOLDER + "/" + fileName;
             FileHandle fileHandle = Gdx.files.internal(path);
-            if (fileHandle.exists()) {
+            if (fileExists(fileHandle)) {
                 return fileHandle;
             }
         } else {
             String path = PORTRAIT_LAYOUT_FOLDER + "/" + fileName;
             FileHandle fileHandle = Gdx.files.internal(path);
-            if (fileHandle.exists()) {
+            if (fileExists(fileHandle)) {
                 return fileHandle;
             }
         }
 
         String path = DEFAULT_LAYOUT_FOLDER + "/" + fileName;
         return Gdx.files.internal(path);
+    }
+
+    /**
+     * File.exists is too slow on Android.
+     * @param file
+     * @return true if file exists.
+     */
+    private boolean fileExists(FileHandle file) {
+        boolean exists = false;
+        try {
+            file.read().close();
+            exists = true;
+        } catch (Exception e) {
+            //ignore
+        }
+        return exists;
     }
 
     public AssetsInterface getAssets() {
