@@ -17,6 +17,7 @@ public class ButtonBuilder extends ActorBuilder {
     protected TextureRegionDrawable up;
     protected TextureRegionDrawable down;
     protected TextureRegionDrawable disabled;
+    protected TextureRegionDrawable checked;
 
     public ButtonBuilder(AssetsInterface assets, ResolutionHelper resolutionHelper, LocalizationService localizationService) {
         super(assets, resolutionHelper, localizationService);
@@ -30,6 +31,9 @@ public class ButtonBuilder extends ActorBuilder {
         if (disabled != null) {
             button.getStyle().disabled = disabled;
         }
+        if ( checked != null){
+            button.getStyle().checked = checked;
+        }
         normalizeModelSize(buttonModel, up.getMinWidth(), up.getMinHeight());
         setBasicProperties(model, button);
         return button;
@@ -42,12 +46,18 @@ public class ButtonBuilder extends ActorBuilder {
             if (buttonModel.getTextureSrcDisabled() != null) {
                 this.disabled = new TextureRegionDrawable(new TextureRegion(new Texture(buttonModel.getTextureSrcDisabled())));
             }
+            if ( buttonModel.getTextureSrcChecked() != null){
+                this.checked = new TextureRegionDrawable( new TextureRegion( new Texture( buttonModel.getTextureSrcChecked())));
+            }
         } else {
             TextureAtlas textureAtlas = assets.getTextureAtlas(buttonModel.getAtlasName());
             this.down = new TextureRegionDrawable(textureAtlas.findRegion(buttonModel.getFrameDown()));
             this.up = new TextureRegionDrawable(textureAtlas.findRegion(buttonModel.getFrameUp()));
-            if (buttonModel.getTextureSrcDisabled() != null) {
+            if ( buttonModel.getFrameDisabled() != null) {
                 this.disabled = new TextureRegionDrawable(textureAtlas.findRegion(buttonModel.getFrameDisabled()));
+            }
+            if ( buttonModel.getFrameChecked() != null) {
+                this.checked = new TextureRegionDrawable( textureAtlas.findRegion( buttonModel.getFrameChecked()));
             }
         }
     }

@@ -5,9 +5,11 @@ public class ButtonModel extends BaseModel {
     private String frameUp;
     private String frameDown;
     private String frameDisabled;
+    private String frameChecked;
     private String textureSrcUp;
     private String textureSrcDown;
     private String textureSrcDisabled;
+    private String textureSrcChecked;
 
     public String getAtlasName() {
         return atlasName;
@@ -63,5 +65,21 @@ public class ButtonModel extends BaseModel {
 
     public void setTextureSrcDisabled(String textureSrcDisabled) {
         this.textureSrcDisabled = textureSrcDisabled;
+    }
+
+    public String getFrameChecked() {
+        return frameChecked;
+    }
+
+    public void setFrameChecked(String frameChecked) {
+        this.frameChecked = frameChecked;
+    }
+
+    public String getTextureSrcChecked() {
+        return textureSrcChecked;
+    }
+
+    public void setTextureSrcChecked(String textureSrcChecked) {
+        this.textureSrcChecked = textureSrcChecked;
     }
 }
