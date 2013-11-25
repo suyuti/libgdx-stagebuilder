@@ -15,6 +15,7 @@ public class XmlModelBuilder {
     public static final String LABEL_TAG = "Label";
     public static final String SELECT_BOX_TAG = "SelectBox";
     public static final String GROUP_TAG = "Group";
+    public static final String SLIDER_TAG = "Slider";
     public static final String LOCALIZED_STRING_PREFIX = "@string/";
 
     public List<BaseModel> buildModels(FileHandle fileHandle) throws Exception {
@@ -50,7 +51,7 @@ public class XmlModelBuilder {
 
     private BaseModel processXmlStartTag(XmlPullParser xmlParser) throws Exception {
         String tagName = xmlParser.getName();
-        BaseModel model = null;
+        BaseModel model;
         if (IMAGE_TAG.equalsIgnoreCase(tagName)) {
             model = buildImageModel(xmlParser);
         } else if (BUTTON_TAG.equalsIgnoreCase(tagName)) {
@@ -61,6 +62,8 @@ public class XmlModelBuilder {
             model = buildLabelModel(xmlParser);
         } else if (SELECT_BOX_TAG.equalsIgnoreCase(tagName)) {
             model = buildSelectBoxModel(xmlParser);
+        } else if ( SLIDER_TAG.equalsIgnoreCase(tagName)) {
+            model = buildSliderModel( xmlParser);
         } else if (GROUP_TAG.equalsIgnoreCase(tagName)) {
             model = buildGroupModel(xmlParser);
         } else if (isCustomWidget(tagName)) {
@@ -159,9 +162,29 @@ public class XmlModelBuilder {
         button.setFrameUp(XmlHelper.readStringAttribute(xmlParser, "frameUp"));
         button.setFrameDown(XmlHelper.readStringAttribute(xmlParser, "frameDown"));
         button.setFrameDisabled(XmlHelper.readStringAttribute(xmlParser, "frameDisabled"));
+        button.setFrameChecked( XmlHelper.readStringAttribute( xmlParser, "frameChecked"));
         button.setTextureSrcUp(XmlHelper.readStringAttribute(xmlParser, "textureSrcUp"));
         button.setTextureSrcDown(XmlHelper.readStringAttribute(xmlParser, "textureSrcDown"));
         button.setTextureSrcDisabled(XmlHelper.readStringAttribute(xmlParser, "textureSrcDisabled"));
+        button.setTextureSrcChecked( XmlHelper.readStringAttribute( xmlParser, "textureSrcChecked"));
+    }
+
+    private BaseModel buildSliderModel( XmlPullParser xmlPullParser){
+        SliderModel sliderModel = new SliderModel();
+        setBaseModelParameters( sliderModel, xmlPullParser);
+        setSliderModelProperties(sliderModel, xmlPullParser);
+        return sliderModel;
+    }
+
+    private void setSliderModelProperties( SliderModel sliderModel, XmlPullParser xmlPullParser){
+        sliderModel.setAtlasName( XmlHelper.readStringAttribute( xmlPullParser, "atlas"));
+        sliderModel.setFrameBackground( XmlHelper.readStringAttribute( xmlPullParser, "frameBackground"));
+        sliderModel.setFrameKnob( XmlHelper.readStringAttribute( xmlPullParser, "frameKnob"));
+        sliderModel.setTextureSrcBackground( XmlHelper.readStringAttribute( xmlPullParser, "textureSrcBackground"));
+        sliderModel.setTextureSrcKnob( XmlHelper.readStringAttribute( xmlPullParser, "textureSrcKnob"));
+        sliderModel.setMinValue( XmlHelper.readFloatAttribute( xmlPullParser, "minValue", 0));
+        sliderModel.setMaxValue( XmlHelper.readFloatAttribute( xmlPullParser, "maxValue", 1));
+        sliderModel.setStepSize( XmlHelper.readFloatAttribute( xmlPullParser, "stepSize", 0.1f));
     }
 
     private BaseModel buildTextButtonModel(XmlPullParser xmlParser) {

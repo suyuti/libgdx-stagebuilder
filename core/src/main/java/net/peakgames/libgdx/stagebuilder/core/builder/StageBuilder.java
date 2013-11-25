@@ -2,8 +2,6 @@ package net.peakgames.libgdx.stagebuilder.core.builder;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
@@ -54,6 +52,7 @@ public class StageBuilder {
         builders.put(SelectBoxModel.class, new SelectBoxBuilder(this.assets, this.resolutionHelper, this.localizationService));
         builders.put(CustomWidgetModel.class, new CustomWidgetBuilder(this.assets, this.resolutionHelper, this.localizationService));
         builders.put(ExternalGroupModel.class, new ExternalGroupModelBuilder(this.assets, this.resolutionHelper, this.localizationService, this));
+        builders.put(SliderModel.class, new SliderBuilder( this.assets, this.resolutionHelper, this.localizationService));
     }
 
     public Group buildGroup(String fileName) throws Exception {
@@ -108,19 +107,35 @@ public class StageBuilder {
         if (isLandscape) {
             String path = LANDSCAPE_LAYOUT_FOLDER + "/" + fileName;
             FileHandle fileHandle = Gdx.files.internal(path);
-            if (fileHandle.exists()) {
+            if (fileExists(fileHandle)) {
                 return fileHandle;
             }
         } else {
             String path = PORTRAIT_LAYOUT_FOLDER + "/" + fileName;
             FileHandle fileHandle = Gdx.files.internal(path);
-            if (fileHandle.exists()) {
+            if (fileExists(fileHandle)) {
                 return fileHandle;
             }
         }
 
         String path = DEFAULT_LAYOUT_FOLDER + "/" + fileName;
         return Gdx.files.internal(path);
+    }
+
+    /**
+     * File.exists is too slow on Android.
+     * @param file
+     * @return true if file exists.
+     */
+    private boolean fileExists(FileHandle file) {
+        boolean exists = false;
+        try {
+            file.read().close();
+            exists = true;
+        } catch (Exception e) {
+            //ignore
+        }
+        return exists;
     }
 
     public AssetsInterface getAssets() {

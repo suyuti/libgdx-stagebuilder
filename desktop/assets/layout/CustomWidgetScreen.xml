@@ -5,7 +5,7 @@
     <label name="progress_bar_description" x="0" y="100" width="800" align="center" wrap="true"
            text="This is a custom progress bar widget." fontName="default_font.fnt" fontColor="000000"/>
 
-    <net.peakgames.libgdx.stagebuilder.core.demo.widgets.LoadingWidget name="loading_widget"/>
+    
 
     <!-- ProgressBarWidget is a custom widget. -->
     <net.peakgames.libgdx.stagebuilder.core.demo.widgets.ProgressBarWidget
@@ -24,4 +24,20 @@
             duration="4"
             progressType="INFINITE"
             active="true"/>
+    
+    <net.peakgames.libgdx.stagebuilder.core.widgets.LoadingWidget 
+        name="loading_widget"
+        fullScreen="false"
+        alpha="0.5"
+        text="loading"
+        fontName="default_font.fnt"
+        backgroundFrame="loading_circle_background"
+        foregroundFrame="loading_circle_foreground"
+        atlasName="common.atlas"
+        boundaryWidth="120"
+        boundaryHeight="120"
+        x="400"
+        y="240"
+    />
+    
 </group>

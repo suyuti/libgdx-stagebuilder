@@ -6,5 +6,5 @@
 
     <textbutton name="showPopupButton" atlas="common.atlas" frameUp="green_button" frameDown="green_buttonH" x="270" y="400" witdth="400" text="Show Popup" fontName="default_font.fnt" />
 
-    <Popup name="popup" x="200" y="140" visible="false"/>
+    <Popup name="popup" x="200" y="140"/>
 </group>
