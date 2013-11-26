@@ -31,6 +31,12 @@ public class TextButtonBuilder extends ButtonBuilder {
         if (textButtonModel.getFontColor() != null) {
             style.fontColor = Color.valueOf(textButtonModel.getFontColor());
         }
+        if (disabled != null) {
+            style.disabled = disabled;
+        }
+        if ( checked != null){
+            style.checked = checked;
+        }
 
         TextButton textButton = new TextButton(getLocalizedString(textButtonModel.getText()).replace("\\n", String.format("%n")), style);
         normalizeModelSize(textButtonModel, up.getMinWidth(), up.getMinHeight());
