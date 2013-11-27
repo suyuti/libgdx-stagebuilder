@@ -1,7 +1,10 @@
 package net.peakgames.libgdx.stagebuilder.core.xml;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+
 import net.peakgames.libgdx.stagebuilder.core.model.*;
+
 import org.xmlpull.v1.XmlPullParser;
 
 import java.util.LinkedList;
@@ -16,6 +19,7 @@ public class XmlModelBuilder {
     public static final String SELECT_BOX_TAG = "SelectBox";
     public static final String GROUP_TAG = "Group";
     public static final String SLIDER_TAG = "Slider";
+    public static final String TEXT_FIELD_TAG = "TextField";
     public static final String LOCALIZED_STRING_PREFIX = "@string/";
 
     public List<BaseModel> buildModels(FileHandle fileHandle) throws Exception {
@@ -58,6 +62,8 @@ public class XmlModelBuilder {
             model = buildButtonModel(xmlParser);
         } else if (TEXT_BUTTON_TAG.equalsIgnoreCase(tagName)) {
             model = buildTextButtonModel(xmlParser);
+        } else if (TEXT_FIELD_TAG.equalsIgnoreCase(tagName)) {
+            model = buildTextFieldModel(xmlParser);
         } else if (LABEL_TAG.equalsIgnoreCase(tagName)) {
             model = buildLabelModel(xmlParser);
         } else if (SELECT_BOX_TAG.equalsIgnoreCase(tagName)) {
@@ -185,6 +191,24 @@ public class XmlModelBuilder {
         sliderModel.setMinValue( XmlHelper.readFloatAttribute( xmlPullParser, "minValue", 0));
         sliderModel.setMaxValue( XmlHelper.readFloatAttribute( xmlPullParser, "maxValue", 1));
         sliderModel.setStepSize( XmlHelper.readFloatAttribute( xmlPullParser, "stepSize", 0.1f));
+    }
+    
+    private BaseModel buildTextFieldModel(XmlPullParser xmlParser) {
+    	TextFieldModel textFieldModel = new TextFieldModel();
+    	setBaseModelParameters(textFieldModel, xmlParser);
+    	textFieldModel.setAtlasName( XmlHelper.readStringAttribute( xmlParser, "atlas"));
+    	textFieldModel.setText(XmlHelper.readStringAttribute(xmlParser, "text"));
+    	textFieldModel.setBackgroundImageName(XmlHelper.readStringAttribute(xmlParser, "backgroundImage"));
+    	textFieldModel.setSelectionImageName(XmlHelper.readStringAttribute(xmlParser, "selectionImage"));
+    	textFieldModel.setCursorImageName(XmlHelper.readStringAttribute(xmlParser, "cursorImage"));
+    	textFieldModel.setBackGroundOffset(XmlHelper.readIntAttribute(xmlParser, "backgroundOffset", 0));
+    	textFieldModel.setSelectionOffset(XmlHelper.readIntAttribute(xmlParser, "selectionOffset", 0));
+    	textFieldModel.setCursorOffset(XmlHelper.readIntAttribute(xmlParser, "cursorOffset", 0));
+    	textFieldModel.setFontName(XmlHelper.readStringAttribute(xmlParser, "fontName"));
+    	textFieldModel.setFontColor(XmlHelper.readStringAttribute(xmlParser, "fontColor"));
+    	textFieldModel.setPassword(XmlHelper.readBooleanAttribute(xmlParser, "password", false));
+    	textFieldModel.setPasswordChar(XmlHelper.readStringAttribute(xmlParser, "passwordChar", "*"));
+    	return textFieldModel;
     }
 
     private BaseModel buildTextButtonModel(XmlPullParser xmlParser) {

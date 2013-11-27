@@ -53,6 +53,7 @@ public class StageBuilder {
         builders.put(CustomWidgetModel.class, new CustomWidgetBuilder(this.assets, this.resolutionHelper, this.localizationService));
         builders.put(ExternalGroupModel.class, new ExternalGroupModelBuilder(this.assets, this.resolutionHelper, this.localizationService, this));
         builders.put(SliderModel.class, new SliderBuilder( this.assets, this.resolutionHelper, this.localizationService));
+        builders.put(TextFieldModel.class, new TextFieldBuilder(assets, resolutionHelper, localizationService));
     }
 
     public Group buildGroup(String fileName) throws Exception {
