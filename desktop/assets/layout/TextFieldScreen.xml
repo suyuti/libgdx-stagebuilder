@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group>
+
+	<image name="background_image" atlas="common.atlas" frame="background" type="background"/>
+	
+	<button name="backButton" x="10" y="420" atlas="common.atlas" frameUp="back_button" frameDown="back_buttonH"/>
+    
+    <textField name="textFieldPasswordDefaultChar"
+    			text="Type here "
+    			atlas="common.atlas"
+    			cursorImage="cursor"
+    			selectionImage="selection"
+    			backgroundImage="textFieldBackground"
+    			backgroundOffset="6"
+    			cursorOffset="1"
+    			selectionOffset="1"
+    			fontName="default_font.fnt"
+    			fontColor="000000"
+    			width="345"
+    			height="50"
+    			x="200"
+    			y="200"
+    			password="true"/>
+    
+    <textField name="textFieldPasswordSpecialChar"
+    			text="Type here "
+    			atlas="common.atlas"
+    			cursorImage="cursor"
+    			selectionImage="selection"
+    			backgroundImage="textFieldBackground"
+    			backgroundOffset="6"
+    			cursorOffset="1"
+    			selectionOffset="1"
+    			fontName="default_font.fnt"
+    			fontColor="BBAAFF"
+    			width="345"
+    			height="50"
+    			x="200"
+    			y="150"
+    			password="true"
+    			passwordChar="#"/>
+    			
+    <textField name="textField"
+    			text="Type here "
+    			atlas="common.atlas"
+    			cursorImage="cursor"
+    			selectionImage="selection"
+    			backgroundImage="textFieldBackground"
+    			backgroundOffset="6"
+    			cursorOffset="1"
+    			selectionOffset="1"
+    			fontName="default_font.fnt"
+    			fontColor="000000"
+    			width="150"
+    			height="50"
+    			x="200"
+    			y="100"/>
+
+</group>

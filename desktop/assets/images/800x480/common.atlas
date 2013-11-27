@@ -100,6 +100,13 @@ back_button
   orig: 55, 53
   offset: 0, 0
   index: -1
+cursor
+  rotate: false
+  xy: 1011, 40
+  size: 3, 3
+  orig: 3, 3
+  offset: 0, 0
+  index: -1
 instagram_logo
   rotate: false
   xy: 2, 643
@@ -133,6 +140,20 @@ progressbar_foreground
   xy: 1006, 2
   size: 16, 36
   orig: 16, 36
+  offset: 0, 0
+  index: -1
+selection
+  rotate: false
+  xy: 1006, 40
+  size: 3, 3
+  orig: 3, 3
+  offset: 0, 0
+  index: -1
+textFieldBackground
+  rotate: false
+  xy: 2, 614
+  size: 20, 20
+  orig: 20, 20
   offset: 0, 0
   index: -1
 background
