@@ -1,15 +1,16 @@
 package net.peakgames.libgdx.stagebuilder.android;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import net.peakgames.libgdx.stagebuilder.core.demo.StageBuilderDemo;
+import net.peakgames.libgdx.stagebuilder.core.keyboard.AndroidKeyboardEventService;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.math.Vector2;
-import net.peakgames.libgdx.stagebuilder.core.StageBuilderTest;
-import net.peakgames.libgdx.stagebuilder.core.demo.StageBuilderDemo;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class StageBuilderTestActivity extends AndroidApplication {
 
@@ -30,5 +31,9 @@ public class StageBuilderTestActivity extends AndroidApplication {
         demo.initialize(metrics.widthPixels, metrics.heightPixels);
 
         initialize(demo, config);
+        
+        AndroidKeyboardEventService androidKeyboardEventService = new AndroidKeyboardEventService(graphics);
+        androidKeyboardEventService.initialize();
+        demo.setSoftKeyboardEventInterface(androidKeyboardEventService);
     }
 }
