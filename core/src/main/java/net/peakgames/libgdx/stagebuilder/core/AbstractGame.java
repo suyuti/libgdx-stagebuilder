@@ -1,19 +1,22 @@
 package net.peakgames.libgdx.stagebuilder.core;
 
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.math.Vector2;
-import net.peakgames.libgdx.stagebuilder.core.assets.Assets;
-import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
-import net.peakgames.libgdx.stagebuilder.core.assets.ResolutionHelper;
-import net.peakgames.libgdx.stagebuilder.core.assets.ScreenResolutionFileHandleResolver;
-import net.peakgames.libgdx.stagebuilder.core.services.LocalizationService;
-
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+
+import net.peakgames.libgdx.stagebuilder.core.assets.Assets;
+import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
+import net.peakgames.libgdx.stagebuilder.core.assets.ResolutionHelper;
+import net.peakgames.libgdx.stagebuilder.core.assets.ScreenResolutionFileHandleResolver;
+import net.peakgames.libgdx.stagebuilder.core.keyboard.KeyboardManager;
+import net.peakgames.libgdx.stagebuilder.core.keyboard.SoftKeyboardEventInterface;
+import net.peakgames.libgdx.stagebuilder.core.services.LocalizationService;
+
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.math.Vector2;
 
 public abstract class AbstractGame implements ApplicationListener {
 
@@ -29,6 +32,8 @@ public abstract class AbstractGame implements ApplicationListener {
     private ResolutionHelper resolutionHelper;
     private AssetsInterface assetsInterface;
     private ScreenResolutionFileHandleResolver fileHandleResolver;
+    private SoftKeyboardEventInterface softKeyboardEventInterface;
+    private KeyboardManager keyboardManager;
 
     public abstract List<Vector2> getSupportedResolutions();
     public abstract LocalizationService getLocalizationService();
@@ -40,6 +45,7 @@ public abstract class AbstractGame implements ApplicationListener {
         fileHandleResolver = new ScreenResolutionFileHandleResolver(this.width, supportedResolutions);
         this.resolutionHelper = new ResolutionHelper(TARGET_WIDTH, TARGET_HEIGHT, width, height, fileHandleResolver.findBestResolution().x);
         this.assetsInterface = new Assets(fileHandleResolver, resolutionHelper);
+        this.keyboardManager = new KeyboardManager(height);
     }
 
     @Override
@@ -118,8 +124,15 @@ public abstract class AbstractGame implements ApplicationListener {
     }
 
     private void displayTopScreen() {
+    	updateKeyboardManagerStage();
         this.topScreen.show();
     }
+    
+	private void updateKeyboardManagerStage() {
+		if (this.topScreen instanceof AbstractScreen) {        	
+    		this.keyboardManager.setStage(((AbstractScreen) getTopScreen()).stage);
+    	}
+	}
 
     /**
      * Disposes top screen and shows previous screen.
@@ -212,5 +225,14 @@ public abstract class AbstractGame implements ApplicationListener {
 		public void onStageReloaded() {
 		}
     }
+
+	public KeyboardManager getKeyboardManager() {
+		return keyboardManager;
+	}
+	
+	public void setSoftKeyboardEventInterface(SoftKeyboardEventInterface softKeyboardEventInterface) {
+		this.softKeyboardEventInterface = softKeyboardEventInterface;
+		this.softKeyboardEventInterface.setSoftKeyboardEventListener(keyboardManager);
+	}
 }
 
