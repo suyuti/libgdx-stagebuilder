@@ -9,7 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 
 public class KeyboardManager implements SoftKeyboardEventListener {
 	
-	private KeyboardManagerListener listener;
+	private static final float STAGE_SHIFT_DURATION = 0.2f;
+	private SoftKeyboardEventListener listener;
 	private boolean keyboardOpen;
 	private Stage stage;
 	private String focusedActorName;
@@ -32,11 +33,11 @@ public class KeyboardManager implements SoftKeyboardEventListener {
 		float topOfFocusedActor = textFieldScreenY + focusedActor.getHeight();
 		if(isTextFieldOutOfScreen(topOfFocusedActor)) {
 			float stageYDifference = screenHeight - topOfFocusedActor;
-			rootGroup.addAction(Actions.moveTo(rootGroup.getX(), rootGroup.getY() + stageYDifference, 0.4f));
+			rootGroup.addAction(Actions.moveTo(rootGroup.getX(), rootGroup.getY() + stageYDifference, STAGE_SHIFT_DURATION));
 		} else {			
 			float stageYDifference = keyboardHeight - textFieldScreenY;
 			if(isTextFieldCoveredByKeyboard(stageYDifference)) {			
-				rootGroup.addAction(Actions.moveTo(rootGroup.getX(), rootGroup.getY() + stageYDifference, 0.4f));
+				rootGroup.addAction(Actions.moveTo(rootGroup.getX(), rootGroup.getY() + stageYDifference, STAGE_SHIFT_DURATION));
 			}
 		}
 
@@ -59,7 +60,7 @@ public class KeyboardManager implements SoftKeyboardEventListener {
 		return screenY;
 	}
 	
-	public void setListener(KeyboardManagerListener listener) {
+	public void setListener(SoftKeyboardEventListener listener) {
 		this.listener = listener;
 	}
 
@@ -106,7 +107,7 @@ public class KeyboardManager implements SoftKeyboardEventListener {
 			updateStagePosition(focusedActor);
 		} 
 		if(listener != null) {
-			listener.keyboardOpened(keyboardHeight);
+			listener.softKeyboardOpened(keyboardHeight);
 		}
 	}
 
@@ -119,7 +120,7 @@ public class KeyboardManager implements SoftKeyboardEventListener {
 		Group rootGroup = stage.getRoot();
 		rootGroup.addAction(Actions.moveTo(rootGroup.getX(), initialStageY, 0.4f));
 		if(listener != null) {
-			listener.keyboardClosed(keyboardHeight);
+			listener.softKeyboardClosed(keyboardHeight);
 		}
 	}
 	
