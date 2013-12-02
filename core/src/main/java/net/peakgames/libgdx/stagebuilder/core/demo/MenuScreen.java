@@ -36,6 +36,14 @@ public class MenuScreen extends DemoScreen {
                 game.addScreen(imageScreen);
             }
         });
+        
+        findButton("textField_screen").addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                TextFieldScreen textFieldScreen = new TextFieldScreen(game);
+                game.addScreen(textFieldScreen);
+            }
+        });
 
         findButton("label_screen").addListener(new ClickListener() {
             @Override
