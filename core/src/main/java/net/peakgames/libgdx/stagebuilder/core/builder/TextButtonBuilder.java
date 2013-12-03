@@ -41,7 +41,12 @@ public class TextButtonBuilder extends ButtonBuilder {
         TextButton textButton = new TextButton(getLocalizedString(textButtonModel.getText()).replace("\\n", String.format("%n")), style);
         normalizeModelSize(textButtonModel, up.getMinWidth(), up.getMinHeight());
         setBasicProperties(textButtonModel, textButton);
+        setTextButtonProperties(textButtonModel, font, textButton);
 
+        return textButton;
+    }
+
+    protected void setTextButtonProperties(TextButtonModel textButtonModel, BitmapFont font, TextButton textButton) {
         float positionMultiplier = resolutionHelper.getPositionMultiplier();
         textButton.padBottom(textButtonModel.getLabelPaddingBottom() * positionMultiplier);
         textButton.padTop(textButtonModel.getLabelPaddingTop() * positionMultiplier);
@@ -61,7 +66,5 @@ public class TextButtonBuilder extends ButtonBuilder {
             label.setFontScale(font.getScaleX() * textButtonModel.getFontScale());
             label.setAlignment(Align.center);
         }
-
-        return textButton;
     }
 }

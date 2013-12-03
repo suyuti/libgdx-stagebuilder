@@ -1,7 +1,6 @@
 package net.peakgames.libgdx.stagebuilder.core.xml;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 
 import net.peakgames.libgdx.stagebuilder.core.model.*;
 
@@ -20,6 +19,7 @@ public class XmlModelBuilder {
     public static final String GROUP_TAG = "Group";
     public static final String SLIDER_TAG = "Slider";
     public static final String TEXT_FIELD_TAG = "TextField";
+    public static final String CHECKBOX_TAG = "CheckBox";
     public static final String LOCALIZED_STRING_PREFIX = "@string/";
 
     public List<BaseModel> buildModels(FileHandle fileHandle) throws Exception {
@@ -70,11 +70,13 @@ public class XmlModelBuilder {
             model = buildSelectBoxModel(xmlParser);
         } else if ( SLIDER_TAG.equalsIgnoreCase(tagName)) {
             model = buildSliderModel( xmlParser);
-        } else if (GROUP_TAG.equalsIgnoreCase(tagName)) {
+        } else if ( GROUP_TAG.equalsIgnoreCase(tagName)) {
             model = buildGroupModel(xmlParser);
+        } else if ( CHECKBOX_TAG.equalsIgnoreCase( tagName)){
+            model = buildCheckBoxModel( xmlParser);
         } else if (isCustomWidget(tagName)) {
             model = buildCustomWidget(xmlParser, tagName);
-        } else {
+        } else{
             model = buildExternalGroupModel(xmlParser, tagName);
         }
         return model;
@@ -215,6 +217,29 @@ public class XmlModelBuilder {
         TextButtonModel textButton = new TextButtonModel();
         setBaseModelParameters(textButton, xmlParser);
         setButtonModelProperties(textButton, xmlParser);
+        setTextButtonModelProperties(textButton, xmlParser);
+        return textButton;
+    }
+
+    private BaseModel buildCheckBoxModel( XmlPullParser xmlPullParser){
+        CheckBoxModel checkBoxModel = new CheckBoxModel();
+        setBaseModelParameters( checkBoxModel, xmlPullParser);
+        setButtonModelProperties( checkBoxModel, xmlPullParser);
+        setTextButtonModelProperties( checkBoxModel, xmlPullParser);
+        setCheckBoxModelProperties( checkBoxModel, xmlPullParser);
+        return checkBoxModel;
+    }
+
+    private void setCheckBoxModelProperties(CheckBoxModel checkBoxModel, XmlPullParser xmlPullParser) {
+        checkBoxModel.setFrameCheckboxOff( XmlHelper.readStringAttribute( xmlPullParser, "frameCheckBoxOff"));
+        checkBoxModel.setFrameCheckboxOn(XmlHelper.readStringAttribute(xmlPullParser, "frameCheckBoxOn"));
+        checkBoxModel.setFrameCheckboxOver( XmlHelper.readStringAttribute( xmlPullParser, "frameCheckBoxOver"));
+        checkBoxModel.setTextureSrcCheckboxOff(XmlHelper.readStringAttribute(xmlPullParser, "textureSrcCheckBoxOff"));
+        checkBoxModel.setTextureSrcCheckboxOn(XmlHelper.readStringAttribute(xmlPullParser, "textureSrcCheckBoxOn"));
+        checkBoxModel.setTextureSrcCheckboxOver(XmlHelper.readStringAttribute(xmlPullParser, "textureSrcCheckBoxOver"));
+    }
+
+    private void setTextButtonModelProperties( TextButtonModel textButton, XmlPullParser xmlParser) {
         textButton.setText(XmlHelper.readStringAttribute(xmlParser, "text"));
         textButton.setFontName(XmlHelper.readStringAttribute(xmlParser, "fontName"));
         textButton.setFontColor(XmlHelper.readStringAttribute(xmlParser, "fontColor"));
@@ -226,7 +251,6 @@ public class XmlModelBuilder {
         textButton.setLabelPaddingBottom(XmlHelper.readFloatAttribute(xmlParser, "labelPaddingBottom", 0.0f));
         textButton.setAlignment(XmlHelper.readStringAttribute(xmlParser, "align"));
         textButton.setWrap(XmlHelper.readBooleanAttribute(xmlParser, "align", false));
-        return textButton;
     }
 
 
