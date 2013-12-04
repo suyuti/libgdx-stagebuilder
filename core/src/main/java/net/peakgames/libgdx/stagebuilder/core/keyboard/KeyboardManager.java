@@ -1,5 +1,8 @@
 package net.peakgames.libgdx.stagebuilder.core.keyboard;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -9,17 +12,18 @@ import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 
 public class KeyboardManager implements SoftKeyboardEventListener {
 	
-	private static final float STAGE_SHIFT_DURATION = 0.2f;
 	private SoftKeyboardEventListener listener;
 	private boolean keyboardOpen;
 	private Stage stage;
 	private String focusedActorName;
 	private int keyboardHeight;
 	private float initialStageY;
+	private Map<Actor, Float> initialYCoordinateMap;
 	private int screenHeight;
 	
 	public KeyboardManager(int screenHeight) {
 		this.screenHeight = screenHeight;
+		this.initialYCoordinateMap = new HashMap<Actor, Float>();
 	}
 
 	private void updateStagePosition(Actor focusedActor) {
@@ -33,16 +37,22 @@ public class KeyboardManager implements SoftKeyboardEventListener {
 		float topOfFocusedActor = textFieldScreenY + focusedActor.getHeight();
 		if(isTextFieldOutOfScreen(topOfFocusedActor)) {
 			float stageYDifference = screenHeight - topOfFocusedActor;
-			rootGroup.addAction(Actions.moveTo(rootGroup.getX(), rootGroup.getY() + stageYDifference, STAGE_SHIFT_DURATION));
+			shiftChildren(rootGroup, stageYDifference);
 		} else {			
 			float stageYDifference = keyboardHeight - textFieldScreenY;
 			if(isTextFieldCoveredByKeyboard(stageYDifference)) {			
-				rootGroup.addAction(Actions.moveTo(rootGroup.getX(), rootGroup.getY() + stageYDifference, STAGE_SHIFT_DURATION));
+				shiftChildren(rootGroup, stageYDifference);
 			}
 		}
 
 	}
 	
+	private void shiftChildren(Group rootGroup, float stageYDifference) {
+		for(Actor actor : rootGroup.getChildren()) {
+			actor.setY(actor.getY() + stageYDifference);
+		}
+	}
+
 	private boolean isTextFieldOutOfScreen(float topOfFocusedActor) {
 		return topOfFocusedActor > screenHeight;
 	}
@@ -71,7 +81,10 @@ public class KeyboardManager implements SoftKeyboardEventListener {
 	public void setStage(Stage stage) {
 		this.stage = stage;
 		addFocusChangedListenerToStage();
-		initialStageY = stage.getRoot().getY();
+		initialYCoordinateMap.clear();
+		for(Actor actor : stage.getRoot().getChildren()) {
+			initialYCoordinateMap.put(actor, actor.getY());
+		}
 	}
 
 	private void addFocusChangedListenerToStage() {
@@ -118,7 +131,12 @@ public class KeyboardManager implements SoftKeyboardEventListener {
 			return;
 		}
 		Group rootGroup = stage.getRoot();
-		rootGroup.addAction(Actions.moveTo(rootGroup.getX(), initialStageY, 0.4f));
+		for(Actor actor : rootGroup.getChildren()) {
+			Float actorInitialY = initialYCoordinateMap.get(actor);
+			if(actorInitialY != null) {				
+				actor.setY(actorInitialY);
+			}
+		}
 		if(listener != null) {
 			listener.softKeyboardClosed(keyboardHeight);
 		}
