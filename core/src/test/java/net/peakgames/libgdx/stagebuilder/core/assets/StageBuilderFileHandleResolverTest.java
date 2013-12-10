@@ -8,26 +8,26 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class ScreenResolutionFileHandleResolverTest {
+public class StageBuilderFileHandleResolverTest {
 
 	@Test
 	public void desteklenenTekBirCozunurlukVarsa_HerCihazIcin_AyniCozunurluk_Secilmeli() {
 		List<Vector2> supportedResolutions = new ArrayList<Vector2>();
 		supportedResolutions.add(new Vector2(480, 320));
 		
-		ScreenResolutionFileHandleResolver resolver = new ScreenResolutionFileHandleResolver(480, supportedResolutions);
+		StageBuilderFileHandleResolver resolver = new StageBuilderFileHandleResolver(480, supportedResolutions);
 		assertEquals(new Vector2(480, 320), resolver.findBestResolution());
 		
-		resolver = new ScreenResolutionFileHandleResolver(800, supportedResolutions);
+		resolver = new StageBuilderFileHandleResolver(800, supportedResolutions);
 		assertEquals(new Vector2(480, 320), resolver.findBestResolution());
 		
-		resolver = new ScreenResolutionFileHandleResolver(854, supportedResolutions);
+		resolver = new StageBuilderFileHandleResolver(854, supportedResolutions);
 		assertEquals(new Vector2(480, 320), resolver.findBestResolution());
 		
-		resolver = new ScreenResolutionFileHandleResolver(1280, supportedResolutions);
+		resolver = new StageBuilderFileHandleResolver(1280, supportedResolutions);
 		assertEquals(new Vector2(480, 320), resolver.findBestResolution());
 		
-		resolver = new ScreenResolutionFileHandleResolver(2560, supportedResolutions);
+		resolver = new StageBuilderFileHandleResolver(2560, supportedResolutions);
 		assertEquals(new Vector2(480, 320), resolver.findBestResolution());
 	}
 
@@ -39,22 +39,22 @@ public class ScreenResolutionFileHandleResolverTest {
 		supportedResolutions.add(new Vector2(1280, 800));
 		supportedResolutions.add(new Vector2(2560, 1600));
 
-		ScreenResolutionFileHandleResolver resolver = new ScreenResolutionFileHandleResolver(480, supportedResolutions);
+		StageBuilderFileHandleResolver resolver = new StageBuilderFileHandleResolver(480, supportedResolutions);
 		assertEquals(new Vector2(480, 320), resolver.findBestResolution());
 		
-		resolver = new ScreenResolutionFileHandleResolver(800, supportedResolutions);
+		resolver = new StageBuilderFileHandleResolver(800, supportedResolutions);
 		assertEquals(new Vector2(800, 480), resolver.findBestResolution());
 		
-		resolver = new ScreenResolutionFileHandleResolver(854, supportedResolutions);
+		resolver = new StageBuilderFileHandleResolver(854, supportedResolutions);
 		assertEquals(new Vector2(800, 480), resolver.findBestResolution());
 		
-		resolver = new ScreenResolutionFileHandleResolver(1280, supportedResolutions);
+		resolver = new StageBuilderFileHandleResolver(1280, supportedResolutions);
 		assertEquals(new Vector2(1280, 800), resolver.findBestResolution());
 		
-		resolver = new ScreenResolutionFileHandleResolver(1280, supportedResolutions);
+		resolver = new StageBuilderFileHandleResolver(1280, supportedResolutions);
 		assertEquals(new Vector2(1280, 800), resolver.findBestResolution());
 		
-		resolver = new ScreenResolutionFileHandleResolver(2560, supportedResolutions);
+		resolver = new StageBuilderFileHandleResolver(2560, supportedResolutions);
 		assertEquals(new Vector2(2560, 1600), resolver.findBestResolution());
 	}
 	
@@ -64,11 +64,22 @@ public class ScreenResolutionFileHandleResolverTest {
 		supportedResolutions.add(new Vector2(480, 320));
 		supportedResolutions.add(new Vector2(800, 480));
 
-		ScreenResolutionFileHandleResolver resolver = new ScreenResolutionFileHandleResolver(480, supportedResolutions);
+		StageBuilderFileHandleResolver resolver = new StageBuilderFileHandleResolver(480, supportedResolutions);
 		assertEquals("images/480x320/test.png", resolver.generateFilePath("test.png"));
 		
-		resolver = new ScreenResolutionFileHandleResolver(800, supportedResolutions);
+		resolver = new StageBuilderFileHandleResolver(800, supportedResolutions);
 		assertEquals("images/800x480/test.png", resolver.generateFilePath("test.png"));
 	}
+
+    @Test
+    public void filePathShouldBeCorrectForSupportedSoundFiles() {
+        List<Vector2> supportedResolutions = new ArrayList<Vector2>();
+        supportedResolutions.add(new Vector2(480, 320));
+        supportedResolutions.add(new Vector2(800, 480));
+        StageBuilderFileHandleResolver resolutionFileHandleResolver = new StageBuilderFileHandleResolver( 480, supportedResolutions);
+        assertEquals("test.mp3", resolutionFileHandleResolver.generateFilePath("test.mp3"));
+        assertEquals("audio/sound/test.ogg", resolutionFileHandleResolver.generateFilePath("audio/sound/test.ogg"));
+        assertEquals("audio/test.wav", resolutionFileHandleResolver.generateFilePath("audio/test.wav"));
+    }
 	
 }
