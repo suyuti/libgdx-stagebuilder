@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class ScreenResolutionFileHandleResolver implements FileHandleResolver {
+public class StageBuilderFileHandleResolver implements FileHandleResolver {
 
 	public static final String IMAGES_DIR = "images";
 	/**
@@ -27,7 +27,7 @@ public class ScreenResolutionFileHandleResolver implements FileHandleResolver {
 	 * @param width screen width in pixels
 	 * @param supportedResolutions list of supported resolutions
 	 */
-	public ScreenResolutionFileHandleResolver(int width, List<Vector2> supportedResolutions) {
+	public StageBuilderFileHandleResolver(int width, List<Vector2> supportedResolutions) {
 		this.screenWidth = width;
 		this.supportedResolutions = supportedResolutions;
 		
@@ -51,15 +51,17 @@ public class ScreenResolutionFileHandleResolver implements FileHandleResolver {
 	}
 
 	String generateFilePath(String fileName) {
-		Vector2 bestRes = findBestResolution();
-		StringBuilder sb = new StringBuilder();
-		sb.append(IMAGES_DIR);
-		sb.append("/");
-		sb.append((int)bestRes.x);
-		sb.append("x");
-		sb.append((int)bestRes.y);
-		sb.append("/");
-		sb.append(fileName);
+        StringBuilder sb = new StringBuilder();
+        if ( !isSoundFile( fileName)){
+            Vector2 bestRes = findBestResolution();
+            sb.append(IMAGES_DIR);
+            sb.append("/");
+            sb.append((int)bestRes.x);
+            sb.append("x");
+            sb.append((int)bestRes.y);
+            sb.append("/");
+        }
+        sb.append(fileName);
 		return sb.toString();
 	}
 	
@@ -79,5 +81,14 @@ public class ScreenResolutionFileHandleResolver implements FileHandleResolver {
 		}
 		return supportedResolutions.get(bestResIndex);
 	}
+
+    boolean isSoundFile(String fileName){
+        String lowerCaseFileName = fileName.toLowerCase();
+        if ( lowerCaseFileName.endsWith(".mp3") || lowerCaseFileName.endsWith( ".ogg") || lowerCaseFileName.endsWith(".wav")){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 }

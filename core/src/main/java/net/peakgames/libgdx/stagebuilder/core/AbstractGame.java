@@ -8,7 +8,7 @@ import java.util.Stack;
 import net.peakgames.libgdx.stagebuilder.core.assets.Assets;
 import net.peakgames.libgdx.stagebuilder.core.assets.AssetsInterface;
 import net.peakgames.libgdx.stagebuilder.core.assets.ResolutionHelper;
-import net.peakgames.libgdx.stagebuilder.core.assets.ScreenResolutionFileHandleResolver;
+import net.peakgames.libgdx.stagebuilder.core.assets.StageBuilderFileHandleResolver;
 import net.peakgames.libgdx.stagebuilder.core.keyboard.KeyboardManager;
 import net.peakgames.libgdx.stagebuilder.core.keyboard.SoftKeyboardEventInterface;
 import net.peakgames.libgdx.stagebuilder.core.services.LocalizationService;
@@ -31,7 +31,7 @@ public abstract class AbstractGame implements ApplicationListener {
     private Screen topScreen = NULL_SCREEN;
     private ResolutionHelper resolutionHelper;
     private AssetsInterface assetsInterface;
-    private ScreenResolutionFileHandleResolver fileHandleResolver;
+    private StageBuilderFileHandleResolver fileHandleResolver;
     private SoftKeyboardEventInterface softKeyboardEventInterface;
     private KeyboardManager keyboardManager;
 
@@ -42,7 +42,7 @@ public abstract class AbstractGame implements ApplicationListener {
         this.width = width;
         this.height = height;
         this.supportedResolutions = getSupportedResolutions();
-        fileHandleResolver = new ScreenResolutionFileHandleResolver(this.width, supportedResolutions);
+        fileHandleResolver = new StageBuilderFileHandleResolver(this.width, supportedResolutions);
         this.resolutionHelper = new ResolutionHelper(TARGET_WIDTH, TARGET_HEIGHT, width, height, fileHandleResolver.findBestResolution().x);
         this.assetsInterface = new Assets(fileHandleResolver, resolutionHelper);
         this.keyboardManager = new KeyboardManager(height);
@@ -60,7 +60,7 @@ public abstract class AbstractGame implements ApplicationListener {
         }
         this.width = newWidth;
         this.height = newHeight;
-        fileHandleResolver = new ScreenResolutionFileHandleResolver(this.width, supportedResolutions);
+        fileHandleResolver = new StageBuilderFileHandleResolver(this.width, supportedResolutions);
         float targetWidth = TARGET_WIDTH;
         float targetHeight = TARGET_HEIGHT;
         if (this.height > this.width) {

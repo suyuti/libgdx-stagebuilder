@@ -8,12 +8,12 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Assets implements AssetsInterface {
 
-    private ScreenResolutionFileHandleResolver fileHandleResolver;
+    private StageBuilderFileHandleResolver fileHandleResolver;
     private final ResolutionHelper resolutionHelper;
     private AssetManager assetManager;
     private AssetLoader assetLoader;
 
-    public Assets(ScreenResolutionFileHandleResolver fileHandleResolver, ResolutionHelper resolutionHelper) {
+    public Assets(StageBuilderFileHandleResolver fileHandleResolver, ResolutionHelper resolutionHelper) {
         this.fileHandleResolver = fileHandleResolver;
         this.resolutionHelper = resolutionHelper;
         this.assetManager = new AssetManager(fileHandleResolver);
